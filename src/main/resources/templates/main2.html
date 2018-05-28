@@ -1,0 +1,266 @@
+<div class="views" id='deviceready'>
+      <div class="view view-main">
+
+<!--         <div class="navbar"> -->
+<!--           <div class="navbar-inner"> -->
+<!--             <div class="left sliding"><div class="logo_title">aQua Go</div></div> -->
+<!--           </div> -->
+<!--         </div> -->
+
+<!-- 		 <div class="navbar"> -->
+<!--           <div class="navbar-inner"> -->
+<!--             <div class="left sliding"><div class="logo_title">aQua Go</div></div> -->
+<!--             <div class="right menu_open_icon"><a href="#" data-panel="left" class="link icon-only open-panel"></a></div> -->
+<!--           </div> -->
+<!--         </div> -->
+        
+         <div class="conload" id="loader"><div class="preloader"></div></div>
+         <div class="conload" id="message"><div class="mainnotif"></div></div>
+         <div class="pages navbar-through toolbar-through" >
+  <!-- Start Content  -->       
+         
+      <div data-page="index" class="page homepage">
+            <div class="page-content page-contentMain">
+
+	<div class="navbarpages">
+       <div class="navbar_home_link" onClick="GetHide(this)"><a  id="tab-home" style="display: none;">
+       <img src="images/icons/white/home.png" alt="" title="" /></a>
+       </div>
+       <div class="navbar_page_center">Features</div>
+       <div class="menu_open_icon_white"><a href="#" class="open-panel"><img src="images/menu_open.png" alt="" title="" /></a></div>
+     </div>
+
+   		<div class="tabs-animated-wrap" style=" height: 95%; position: absolute; margin: 0; ">
+                    <div class="tabs">
+                    
+                    <div class="swiper-container swiper-init tab active"  data-effect="coverflow" data-pagination=".swiper-pagination" id="LandingPage" >
+					<div class="swiper-wrapper" style="margin:0; padding: 0">
+						
+						<div class="swiper-slide">
+							<span  style=" " >THE <br /> SMART</span> 
+							<span class="subtitle">fish hobbies solution</span> <a href="#" class="swiper_read_more" style="border: none">swipe to see more</a>
+						</div>
+						<div class="swiper-slide">
+							<span>THE <br />BEST </span> 
+							<span class="subtitle">multipurpose fiture</span> <a href="#PageChpass" class="swiper_read_more tab-link ">see all features</a>
+
+							<span class="subtitle blink " style="color:rgba(255, 255, 255, 0.7); font-size: 100%"> swipe to <a style="color:orange;">register / login</a></span>							
+							
+						</div>
+						
+						<div class="swiper-slide" id="">
+							 	<span class="">JOIN</span>
+							 <form onsubmit="getValid(this)" id="fcRegis" action="member-regis" method="post" data-type="ajax">
+							  <input type="text" placeholder="Username" name="lcuser"  data-require="lcuser" required="required" value="shandy" />
+							  <input type="text" placeholder="Email" name="lcemail" data-require="lcemail" required="required" value="ratex.coo@yahoo.com" />
+							  <input type="hidden" name="lcgcm"   value="mygcm" />
+							  <button type="submit" class="btn btn-default" style=" color: #0c928d; margin-bottom: 0">Submit</button>
+							</form>
+								<span onclick="getPage(this)" data-page="PageLogin" class="subtitle blink " style="color:rgba(255, 255, 255, 0.7); font-size: 100%"> or swipe 	more for <a style="color:orange;">login</a></span>
+						</div>
+						
+						<div class="swiper-slide" id="">
+						<span class="">LOGIN</span>
+						
+							 <form onsubmit="getValid(this)" id="fcLogin" action="member-login" method="post" data-type="ajax">
+							  <input type="text" placeholder="Email" name="lcemail" id="lcemail" data-require="lcemail" required="required" value="ratex.coo@yahoo.com" />
+							  <input type="text" placeholder="Password" name="lcpass" data-require="lcpass" required="required" value="Admin@1993" />
+							   <input type="hidden" name="lcgcm"   value="mygcm" />
+							  <button type="submit" class="btn btn-default" style=" color: #0c928d; margin-bottom: 0">Submit</button>
+							</form>
+							<span onclick="getPage(this)" data-page="PageRegis" class="subtitle blink " style="color:rgba(255, 255, 255, 0.7); font-size: 100%"> or swipe back for <a style="color:orange;">register</a></span>
+						
+						</div>
+						
+						
+						
+					</div>
+					<div class="swiper-pagination" style="position: absolute; bottom:5%"></div>
+				</div>
+				
+						<div class="swiper-slide" id="PageLogin">
+						<span class="">LOGIN</span>
+							 <form onsubmit="getValid(this)" id="fcLogin" action="member-login" method="post" data-type="ajax">
+							  <input type="text" placeholder="Email" name="lcemail" id="lcemail" data-require="lcemail" required="required" value="ratex.coo@yahoo.com" />
+							  <input type="text" placeholder="Password" name="lcpass" data-require="lcpass" required="required" value="Admin@1993" />
+							   <input type="hidden" name="lcgcm"   value="mygcm" />
+							  <button type="submit" class="btn btn-default" style=" color: #0c928d; margin-bottom: 0">Submit</button>
+							</form>
+							<span onclick="getPage(this)" data-page="LandingPage" class="subtitle blink " style="color:rgba(255, 255, 255, 0.7); font-size: 100%"> tap here for <a style="color:orange;">register</a></span>
+						
+						</div>
+						
+				
+                          	<div id="PageChpass" class="tab">
+								<div class="swiper-slide" >
+								 <span class="">Change <br></br> Password</span>
+										 <form onsubmit="getValid(this)" id="fcChpass" action="member-chpass" method="post" data-type="ajax">
+										  <input type="text" placeholder="New Password" name="lctkn" data-require="lctkn" required="required"/>
+										  <button type="submit" class="btn btn-default" style=" color: #0c928d;">Submit</button>
+										</form><br></br>
+								</div> 
+							</div>
+              
+				
+				
+                          <div id="PageHome" class="tab">
+                          
+			            	<div style="" class="mainDash">
+			                   <div class="swiper-container swiper-init"  data-effect="coverflow" data-pagination=".swiper-pagination" style="height: 35%; ">
+									<div class="swiper-wrapper" style="margin:0; padding: 0; ">
+										<div class="swiper-slide imgslide"></div>
+										<div class="swiper-slide imgslide"></div>
+										<div class="swiper-slide imgslide"></div>
+									</div>
+									<div class="swiper-pagination" style="position: absolute; bottom:5%"></div>
+								</div>
+							
+								<div style="width: 100%; margin: auto; height: 65%; margin-top: 1%">
+								
+									<div th:each="listmenu: ${lcmnu}" class="mainMenu" onClick="GetList(this)">
+										<a  class="btn myBtnhead"><i th:classappend="${listmenu.mnuicon}" class="fa "></i></a>
+									</div>
+<!-- 									<div class="mainMenu" onClick="GetList(this)"> -->
+<!-- 										<a class="btn myBtnhead" style="color: #36F"><i -->
+<!-- 											class="fa  fa-weixin"></i></a> -->
+<!-- 									</div> -->
+<!-- 									<div class="mainMenu" onClick="GetList(this)"> -->
+<!-- 										<a class="btn myBtnhead" style="color: #0F0"><i -->
+<!-- 											class="fa  fa-group"></i></a> -->
+<!-- 									</div> -->
+<!-- 									<div class="mainMenu" onClick="GetList(this)"> -->
+<!-- 										<a class="btn myBtnhead" style="color: #0CF"><i -->
+<!-- 											class="fa  fa-shopping-cart"></i></a> -->
+<!-- 									</div> -->
+<!-- 									<div class="mainMenu" onClick="GetList(this)"> -->
+<!-- 										<a class="btn myBtnhead"><i class="fa fa-linux"></i></a> -->
+<!-- 									</div> -->
+<!-- 									<div class="mainMenu" onClick="GetList(this)"> -->
+<!-- 										<a class="btn myBtnhead" style="color: #36F"><i -->
+<!-- 											class="fa  fa-weixin"></i></a> -->
+<!-- 									</div> -->
+								</div>
+								
+							</div>
+											
+                          </div>
+                          
+                          
+                          
+    
+                          <div id="PageListMain" class="tab" style="background: white">
+                                <ul class="features_list_detailed">
+							          <li>
+							          <div class="feat_small_icon"><img src="images/icons/turquoise/cart.png" alt="" title="" /></div>
+							          <div class="feat_small_details">
+							          <h4 style="position: relative; border-bottom: 1px inset; width: 75%">Market Place</h4>
+							          <p>Temukan berbagai macam ikan hias yang kamu inginkan di sini</p>
+							          <a href="blog.html" class="button_small">test this feature</a>
+							          </div>
+							          </li> 
+							          
+							          <li>
+							          <div class="feat_small_icon"><img src="images/icons/turquoise/newspaper.png" alt="" title="" /></div>
+							          <div class="feat_small_details">
+							          <h4 style="position: relative; border-bottom: 1px inset; width: 75%">Auction Gallery</h4>
+							          <p>Lelang ikan hias dengan kualitas terbaik, rasakan kemudahannya</p>
+							          <a href="photos.html" class="button_small">test this feature</a>
+							          </div>
+							          </li>
+							                
+							          <li>
+							          <div class="feat_small_icon"><img src="images/icons/turquoise/pencil.png" alt="" title="" /></div>
+							          <div class="feat_small_details">
+							          <h4 style="position: relative; border-bottom: 1px inset; width: 75%">Share Knowlege</h4>
+							          <p>Share apapun yang kamu ketahui tentang ikan hias</p>
+							          <a href="tabs.html" class="button_small">test this feature</a>
+							          </div>
+							          </li>
+							      </ul>	
+                          </div> 
+                          
+                          
+                          
+                          
+                          
+                          
+                          
+                          
+                          
+                    </div>
+              </div>
+
+
+<!-- 				<div id="PageHome" class="tab tab_costum active" style="background: white"></div> -->
+<!-- 				<div id="PageHomeII" class="tab tab_costum" style="background: red"></div> -->
+
+
+<!--             <div class="tabs-animated-wrap" style="height: 95%; position: absolute"> -->
+          
+<!--             	<div class="tabs"> -->
+            	
+            	
+				
+				
+<!--    				<div id="PageLogin" class="tab tab_costum"> -->
+<!-- 					 <div class="swiper-slide" > -->
+<!-- 					 <span class="">Login</span> -->
+<!-- 							 <form onsubmit="getValid(this)" id="fcLogin" action="member-login" method="post" data-type="ajax"> -->
+<!-- 							  <input type="text" placeholder="Email" name="lcemail" id="lcemail" data-require="lcemail" required="required" /> -->
+<!-- 							  <input type="text" placeholder="Password" name="lcpass" data-require="lcpass" required="required" /> -->
+<!-- 							   <input type="hidden" name="lcgcm"   value="mygcm" /> -->
+<!-- 							  <button type="submit" class="btn btn-default" style=" color: #0c928d;">Submit</button> -->
+<!-- 							</form><br></br> -->
+<!-- 								<span onclick="getPage(this)" data-page="LandingPage" class="subtitle blink " style="color:rgba(255, 255, 255, 0.7); font-size: 100%">Or click <a style="color:orange;">	here</a> for register</span> -->
+<!-- 					</div>  -->
+<!--                 </div> -->
+                
+				
+				
+				
+				
+				
+				
+				
+<!-- 				<div id="PageHome" class="tab tab_costum active" style="background: white"></div> -->
+<!-- 				<div id="PageHomeII" class="tab tab_costum" style="background: red"></div> -->
+<!-- 				</div> -->
+<!--             </div> -->
+            
+          </div>
+          
+          
+        </div>   
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+ <!-- End Content  -->        
+         
+         </div>
+         
+         
+         
+         
+         
+    <!--         <div class="toolbar"> -->
+	<!--               <div class="toolbar-inner"> -->
+	<!--               <ul class="toolbar_icons icons_4row"> -->
+	<!--               <li><a href="#" data-popup=".popup-login" class="open-popup"><img src="images/icons/white/user.png" alt="" title="" /></a></li> -->
+	<!--               <li><a href="features.html"><img src="images/icons/white/settings.png" alt="" title="" /></a></li> -->
+	<!--               <li><a href="photos.html"><img src="images/icons/white/photos.png" alt="" title="" /></a></li> -->
+	<!--               <li><a href="#" data-popup=".popup-social" class="open-popup"><img src="images/icons/white/heart.png" alt="" title="" /></a></li> -->
+	<!--               </ul> -->
+	<!--               </div>   -->
+	<!--         </div> -->     
+         
+      </div>
+</div>

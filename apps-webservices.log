@@ -1,0 +1,30 @@
+INFO    2016-11-06 12:16:28,419 [main] be.dashmon.Application [] [] - Starting Application on Shandy-PC with PID 2384 (E:\Workspace\myMobile_Back\target\classes started by Shandy in E:\Workspace\myMobile_Back)
+INFO    2016-11-06 12:16:28,420 [main] be.dashmon.Application [] [] - No active profile set, falling back to default profiles: default
+INFO    2016-11-06 12:16:28,452 [main] org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext [] [] - Refreshing org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@5be6e01c: startup date [Sun Nov 06 12:16:28 ICT 2016]; root of context hierarchy
+INFO    2016-11-06 12:16:28,556 [background-preinit] org.hibernate.validator.internal.util.Version [] [] - HV000001: Hibernate Validator 5.2.4.Final
+INFO    2016-11-06 12:16:29,459 [main] org.springframework.boot.context.embedded.tomcat.TomcatEmbeddedServletContainer [] [] - Tomcat initialized with port(s): 9000 (http)
+INFO    2016-11-06 12:16:29,542 [localhost-startStop-1] org.springframework.web.context.ContextLoader [] [] - Root WebApplicationContext: initialization completed in 1093 ms
+INFO    2016-11-06 12:16:29,700 [localhost-startStop-1] org.springframework.boot.web.servlet.ServletRegistrationBean [] [] - Mapping servlet: 'dispatcherServlet' to [/]
+INFO    2016-11-06 12:16:29,703 [localhost-startStop-1] org.springframework.boot.web.servlet.FilterRegistrationBean [] [] - Mapping filter: 'characterEncodingFilter' to: [/*]
+INFO    2016-11-06 12:16:29,704 [localhost-startStop-1] org.springframework.boot.web.servlet.FilterRegistrationBean [] [] - Mapping filter: 'hiddenHttpMethodFilter' to: [/*]
+INFO    2016-11-06 12:16:29,704 [localhost-startStop-1] org.springframework.boot.web.servlet.FilterRegistrationBean [] [] - Mapping filter: 'httpPutFormContentFilter' to: [/*]
+INFO    2016-11-06 12:16:29,704 [localhost-startStop-1] org.springframework.boot.web.servlet.FilterRegistrationBean [] [] - Mapping filter: 'requestContextFilter' to: [/*]
+INFO    2016-11-06 12:16:29,991 [main] org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter [] [] - Looking for @ControllerAdvice: org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@5be6e01c: startup date [Sun Nov 06 12:16:28 ICT 2016]; root of context hierarchy
+INFO    2016-11-06 12:16:30,034 [main] org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping [] [] - Mapped "{[/]}" onto public java.lang.String be.dashmon.controller.ApiController.MainIndex(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)
+INFO    2016-11-06 12:16:30,034 [main] org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping [] [] - Mapped "{[/member-regis],methods=[POST],consumes=[application/json]}" onto public java.lang.String be.dashmon.controller.ApiController.saveMerchanreport(java.lang.String) throws java.lang.Exception
+INFO    2016-11-06 12:16:30,036 [main] org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping [] [] - Mapped "{[/error]}" onto public org.springframework.http.ResponseEntity<java.util.Map<java.lang.String, java.lang.Object>> org.springframework.boot.autoconfigure.web.BasicErrorController.error(javax.servlet.http.HttpServletRequest)
+INFO    2016-11-06 12:16:30,036 [main] org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping [] [] - Mapped "{[/error],produces=[text/html]}" onto public org.springframework.web.servlet.ModelAndView org.springframework.boot.autoconfigure.web.BasicErrorController.errorHtml(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)
+INFO    2016-11-06 12:16:30,053 [main] org.springframework.web.servlet.handler.SimpleUrlHandlerMapping [] [] - Mapped URL path [/webjars/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+INFO    2016-11-06 12:16:30,054 [main] org.springframework.web.servlet.handler.SimpleUrlHandlerMapping [] [] - Mapped URL path [/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+INFO    2016-11-06 12:16:30,077 [main] org.springframework.web.servlet.handler.SimpleUrlHandlerMapping [] [] - Mapped URL path [/**/favicon.ico] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+INFO    2016-11-06 12:16:30,190 [main] org.springframework.jmx.export.annotation.AnnotationMBeanExporter [] [] - Registering beans for JMX exposure on startup
+INFO    2016-11-06 12:16:30,230 [main] org.springframework.boot.context.embedded.tomcat.TomcatEmbeddedServletContainer [] [] - Tomcat started on port(s): 9000 (http)
+INFO    2016-11-06 12:16:30,232 [main] be.dashmon.Application [] [] - Started Application in 2.074 seconds (JVM running for 2.443)
+INFO    2016-11-06 12:17:11,639 [http-nio-9000-exec-4] org.springframework.web.servlet.DispatcherServlet [] [] - FrameworkServlet 'dispatcherServlet': initialization started
+INFO    2016-11-06 12:17:11,665 [http-nio-9000-exec-4] org.springframework.web.servlet.DispatcherServlet [] [] - FrameworkServlet 'dispatcherServlet': initialization completed in 26 ms
+INFO    2016-11-06 12:17:11,700 [http-nio-9000-exec-4] ProLog [] [] - ===06-11-2016 12:17:11=======================Begin Trans==============================
+INFO    2016-11-06 12:17:11,700 [http-nio-9000-exec-4] ProLog [] [] - Request : GET
+INFO    2016-11-06 12:17:11,700 [http-nio-9000-exec-4] ProLog [] [] - ReqParam :[Name : Abc,Email : EFGH]
+INFO    2016-11-06 12:17:11,700 [http-nio-9000-exec-4] ProLog [] [] - Response : 200
+INFO    2016-11-06 12:17:11,700 [http-nio-9000-exec-4] ProLog [] [] - ResParam : [Name : Abc,Email : EFGH,RsltCd:200,RsltDesc:Sukses]
+INFO    2016-11-06 12:17:11,700 [http-nio-9000-exec-4] ProLog [] [] - ===========================End Trans============================06-11-2016 12:17:11===

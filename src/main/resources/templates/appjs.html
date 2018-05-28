@@ -1,0 +1,2105 @@
+/*<![CDATA[*/
+var geocoder = new google.maps.Geocoder();
+var animationInterval;
+var width = document.body.clientWidth;
+var height = document.body.clientHeight;
+var sLimit = 6;
+var lctimeout = 15000;
+var SoffSet = sLimit,
+    isPreviousEventComplete = true,
+    isDataAvailable = true,
+    lctipe;
+var lcSoffSet;
+var lcsroll = 0;
+var lcheight = $("#PageListMain").height();
+var lcFuntion = '';
+var lcInit = '';
+var data = {};
+var myApp;
+var apiCont;
+var mainView;
+var $$;
+if (width < 360) {
+    sLimit = sLimit
+} else {
+    sLimit = sLimit + 2
+}
+
+ 
+ var QRCode;!function(){function a(a){this.mode=c.MODE_8BIT_BYTE,this.data=a,this.parsedData=[];for(var b=[],d=0,e=this.data.length;e>d;d++){var f=this.data.charCodeAt(d);f>65536?(b[0]=240|(1835008&f)>>>18,b[1]=128|(258048&f)>>>12,b[2]=128|(4032&f)>>>6,b[3]=128|63&f):f>2048?(b[0]=224|(61440&f)>>>12,b[1]=128|(4032&f)>>>6,b[2]=128|63&f):f>128?(b[0]=192|(1984&f)>>>6,b[1]=128|63&f):b[0]=f,this.parsedData=this.parsedData.concat(b)}this.parsedData.length!=this.data.length&&(this.parsedData.unshift(191),this.parsedData.unshift(187),this.parsedData.unshift(239))}function b(a,b){this.typeNumber=a,this.errorCorrectLevel=b,this.modules=null,this.moduleCount=0,this.dataCache=null,this.dataList=[]}function i(a,b){if(void 0==a.length)throw new Error(a.length+"/"+b);for(var c=0;c<a.length&&0==a[c];)c++;this.num=new Array(a.length-c+b);for(var d=0;d<a.length-c;d++)this.num[d]=a[d+c]}function j(a,b){this.totalCount=a,this.dataCount=b}function k(){this.buffer=[],this.length=0}function m(){return"undefined"!=typeof CanvasRenderingContext2D}function n(){var a=!1,b=navigator.userAgent;return/android/i.test(b)&&(a=!0,aMat=b.toString().match(/android ([0-9]\.[0-9])/i),aMat&&aMat[1]&&(a=parseFloat(aMat[1]))),a}function r(a,b){for(var c=1,e=s(a),f=0,g=l.length;g>=f;f++){var h=0;switch(b){case d.L:h=l[f][0];break;case d.M:h=l[f][1];break;case d.Q:h=l[f][2];break;case d.H:h=l[f][3]}if(h>=e)break;c++}if(c>l.length)throw new Error("Too long data");return c}function s(a){var b=encodeURI(a).toString().replace(/\%[0-9a-fA-F]{2}/g,"a");return b.length+(b.length!=a?3:0)}a.prototype={getLength:function(){return this.parsedData.length},write:function(a){for(var b=0,c=this.parsedData.length;c>b;b++)a.put(this.parsedData[b],8)}},b.prototype={addData:function(b){var c=new a(b);this.dataList.push(c),this.dataCache=null},isDark:function(a,b){if(0>a||this.moduleCount<=a||0>b||this.moduleCount<=b)throw new Error(a+","+b);return this.modules[a][b]},getModuleCount:function(){return this.moduleCount},make:function(){this.makeImpl(!1,this.getBestMaskPattern())},makeImpl:function(a,c){this.moduleCount=4*this.typeNumber+17,this.modules=new Array(this.moduleCount);for(var d=0;d<this.moduleCount;d++){this.modules[d]=new Array(this.moduleCount);for(var e=0;e<this.moduleCount;e++)this.modules[d][e]=null}this.setupPositionProbePattern(0,0),this.setupPositionProbePattern(this.moduleCount-7,0),this.setupPositionProbePattern(0,this.moduleCount-7),this.setupPositionAdjustPattern(),this.setupTimingPattern(),this.setupTypeInfo(a,c),this.typeNumber>=7&&this.setupTypeNumber(a),null==this.dataCache&&(this.dataCache=b.createData(this.typeNumber,this.errorCorrectLevel,this.dataList)),this.mapData(this.dataCache,c)},setupPositionProbePattern:function(a,b){for(var c=-1;7>=c;c++)if(!(-1>=a+c||this.moduleCount<=a+c))for(var d=-1;7>=d;d++)-1>=b+d||this.moduleCount<=b+d||(this.modules[a+c][b+d]=c>=0&&6>=c&&(0==d||6==d)||d>=0&&6>=d&&(0==c||6==c)||c>=2&&4>=c&&d>=2&&4>=d?!0:!1)},getBestMaskPattern:function(){for(var a=0,b=0,c=0;8>c;c++){this.makeImpl(!0,c);var d=f.getLostPoint(this);(0==c||a>d)&&(a=d,b=c)}return b},createMovieClip:function(a,b,c){var d=a.createEmptyMovieClip(b,c),e=1;this.make();for(var f=0;f<this.modules.length;f++)for(var g=f*e,h=0;h<this.modules[f].length;h++){var i=h*e,j=this.modules[f][h];j&&(d.beginFill(0,100),d.moveTo(i,g),d.lineTo(i+e,g),d.lineTo(i+e,g+e),d.lineTo(i,g+e),d.endFill())}return d},setupTimingPattern:function(){for(var a=8;a<this.moduleCount-8;a++)null==this.modules[a][6]&&(this.modules[a][6]=0==a%2);for(var b=8;b<this.moduleCount-8;b++)null==this.modules[6][b]&&(this.modules[6][b]=0==b%2)},setupPositionAdjustPattern:function(){for(var a=f.getPatternPosition(this.typeNumber),b=0;b<a.length;b++)for(var c=0;c<a.length;c++){var d=a[b],e=a[c];if(null==this.modules[d][e])for(var g=-2;2>=g;g++)for(var h=-2;2>=h;h++)this.modules[d+g][e+h]=-2==g||2==g||-2==h||2==h||0==g&&0==h?!0:!1}},setupTypeNumber:function(a){for(var b=f.getBCHTypeNumber(this.typeNumber),c=0;18>c;c++){var d=!a&&1==(1&b>>c);this.modules[Math.floor(c/3)][c%3+this.moduleCount-8-3]=d}for(var c=0;18>c;c++){var d=!a&&1==(1&b>>c);this.modules[c%3+this.moduleCount-8-3][Math.floor(c/3)]=d}},setupTypeInfo:function(a,b){for(var c=this.errorCorrectLevel<<3|b,d=f.getBCHTypeInfo(c),e=0;15>e;e++){var g=!a&&1==(1&d>>e);6>e?this.modules[e][8]=g:8>e?this.modules[e+1][8]=g:this.modules[this.moduleCount-15+e][8]=g}for(var e=0;15>e;e++){var g=!a&&1==(1&d>>e);8>e?this.modules[8][this.moduleCount-e-1]=g:9>e?this.modules[8][15-e-1+1]=g:this.modules[8][15-e-1]=g}this.modules[this.moduleCount-8][8]=!a},mapData:function(a,b){for(var c=-1,d=this.moduleCount-1,e=7,g=0,h=this.moduleCount-1;h>0;h-=2)for(6==h&&h--;;){for(var i=0;2>i;i++)if(null==this.modules[d][h-i]){var j=!1;g<a.length&&(j=1==(1&a[g]>>>e));var k=f.getMask(b,d,h-i);k&&(j=!j),this.modules[d][h-i]=j,e--,-1==e&&(g++,e=7)}if(d+=c,0>d||this.moduleCount<=d){d-=c,c=-c;break}}}},b.PAD0=236,b.PAD1=17,b.createData=function(a,c,d){for(var e=j.getRSBlocks(a,c),g=new k,h=0;h<d.length;h++){var i=d[h];g.put(i.mode,4),g.put(i.getLength(),f.getLengthInBits(i.mode,a)),i.write(g)}for(var l=0,h=0;h<e.length;h++)l+=e[h].dataCount;if(g.getLengthInBits()>8*l)throw new Error("code length overflow. ("+g.getLengthInBits()+">"+8*l+")");for(g.getLengthInBits()+4<=8*l&&g.put(0,4);0!=g.getLengthInBits()%8;)g.putBit(!1);for(;;){if(g.getLengthInBits()>=8*l)break;if(g.put(b.PAD0,8),g.getLengthInBits()>=8*l)break;g.put(b.PAD1,8)}return b.createBytes(g,e)},b.createBytes=function(a,b){for(var c=0,d=0,e=0,g=new Array(b.length),h=new Array(b.length),j=0;j<b.length;j++){var k=b[j].dataCount,l=b[j].totalCount-k;d=Math.max(d,k),e=Math.max(e,l),g[j]=new Array(k);for(var m=0;m<g[j].length;m++)g[j][m]=255&a.buffer[m+c];c+=k;var n=f.getErrorCorrectPolynomial(l),o=new i(g[j],n.getLength()-1),p=o.mod(n);h[j]=new Array(n.getLength()-1);for(var m=0;m<h[j].length;m++){var q=m+p.getLength()-h[j].length;h[j][m]=q>=0?p.get(q):0}}for(var r=0,m=0;m<b.length;m++)r+=b[m].totalCount;for(var s=new Array(r),t=0,m=0;d>m;m++)for(var j=0;j<b.length;j++)m<g[j].length&&(s[t++]=g[j][m]);for(var m=0;e>m;m++)for(var j=0;j<b.length;j++)m<h[j].length&&(s[t++]=h[j][m]);return s};for(var c={MODE_NUMBER:1,MODE_ALPHA_NUM:2,MODE_8BIT_BYTE:4,MODE_KANJI:8},d={L:1,M:0,Q:3,H:2},e={PATTERN000:0,PATTERN001:1,PATTERN010:2,PATTERN011:3,PATTERN100:4,PATTERN101:5,PATTERN110:6,PATTERN111:7},f={PATTERN_POSITION_TABLE:[[],[6,18],[6,22],[6,26],[6,30],[6,34],[6,22,38],[6,24,42],[6,26,46],[6,28,50],[6,30,54],[6,32,58],[6,34,62],[6,26,46,66],[6,26,48,70],[6,26,50,74],[6,30,54,78],[6,30,56,82],[6,30,58,86],[6,34,62,90],[6,28,50,72,94],[6,26,50,74,98],[6,30,54,78,102],[6,28,54,80,106],[6,32,58,84,110],[6,30,58,86,114],[6,34,62,90,118],[6,26,50,74,98,122],[6,30,54,78,102,126],[6,26,52,78,104,130],[6,30,56,82,108,134],[6,34,60,86,112,138],[6,30,58,86,114,142],[6,34,62,90,118,146],[6,30,54,78,102,126,150],[6,24,50,76,102,128,154],[6,28,54,80,106,132,158],[6,32,58,84,110,136,162],[6,26,54,82,110,138,166],[6,30,58,86,114,142,170]],G15:1335,G18:7973,G15_MASK:21522,getBCHTypeInfo:function(a){for(var b=a<<10;f.getBCHDigit(b)-f.getBCHDigit(f.G15)>=0;)b^=f.G15<<f.getBCHDigit(b)-f.getBCHDigit(f.G15);return(a<<10|b)^f.G15_MASK},getBCHTypeNumber:function(a){for(var b=a<<12;f.getBCHDigit(b)-f.getBCHDigit(f.G18)>=0;)b^=f.G18<<f.getBCHDigit(b)-f.getBCHDigit(f.G18);return a<<12|b},getBCHDigit:function(a){for(var b=0;0!=a;)b++,a>>>=1;return b},getPatternPosition:function(a){return f.PATTERN_POSITION_TABLE[a-1]},getMask:function(a,b,c){switch(a){case e.PATTERN000:return 0==(b+c)%2;case e.PATTERN001:return 0==b%2;case e.PATTERN010:return 0==c%3;case e.PATTERN011:return 0==(b+c)%3;case e.PATTERN100:return 0==(Math.floor(b/2)+Math.floor(c/3))%2;case e.PATTERN101:return 0==b*c%2+b*c%3;case e.PATTERN110:return 0==(b*c%2+b*c%3)%2;case e.PATTERN111:return 0==(b*c%3+(b+c)%2)%2;default:throw new Error("bad maskPattern:"+a)}},getErrorCorrectPolynomial:function(a){for(var b=new i([1],0),c=0;a>c;c++)b=b.multiply(new i([1,g.gexp(c)],0));return b},getLengthInBits:function(a,b){if(b>=1&&10>b)switch(a){case c.MODE_NUMBER:return 10;case c.MODE_ALPHA_NUM:return 9;case c.MODE_8BIT_BYTE:return 8;case c.MODE_KANJI:return 8;default:throw new Error("mode:"+a)}else if(27>b)switch(a){case c.MODE_NUMBER:return 12;case c.MODE_ALPHA_NUM:return 11;case c.MODE_8BIT_BYTE:return 16;case c.MODE_KANJI:return 10;default:throw new Error("mode:"+a)}else{if(!(41>b))throw new Error("type:"+b);switch(a){case c.MODE_NUMBER:return 14;case c.MODE_ALPHA_NUM:return 13;case c.MODE_8BIT_BYTE:return 16;case c.MODE_KANJI:return 12;default:throw new Error("mode:"+a)}}},getLostPoint:function(a){for(var b=a.getModuleCount(),c=0,d=0;b>d;d++)for(var e=0;b>e;e++){for(var f=0,g=a.isDark(d,e),h=-1;1>=h;h++)if(!(0>d+h||d+h>=b))for(var i=-1;1>=i;i++)0>e+i||e+i>=b||(0!=h||0!=i)&&g==a.isDark(d+h,e+i)&&f++;f>5&&(c+=3+f-5)}for(var d=0;b-1>d;d++)for(var e=0;b-1>e;e++){var j=0;a.isDark(d,e)&&j++,a.isDark(d+1,e)&&j++,a.isDark(d,e+1)&&j++,a.isDark(d+1,e+1)&&j++,(0==j||4==j)&&(c+=3)}for(var d=0;b>d;d++)for(var e=0;b-6>e;e++)a.isDark(d,e)&&!a.isDark(d,e+1)&&a.isDark(d,e+2)&&a.isDark(d,e+3)&&a.isDark(d,e+4)&&!a.isDark(d,e+5)&&a.isDark(d,e+6)&&(c+=40);for(var e=0;b>e;e++)for(var d=0;b-6>d;d++)a.isDark(d,e)&&!a.isDark(d+1,e)&&a.isDark(d+2,e)&&a.isDark(d+3,e)&&a.isDark(d+4,e)&&!a.isDark(d+5,e)&&a.isDark(d+6,e)&&(c+=40);for(var k=0,e=0;b>e;e++)for(var d=0;b>d;d++)a.isDark(d,e)&&k++;var l=Math.abs(100*k/b/b-50)/5;return c+=10*l}},g={glog:function(a){if(1>a)throw new Error("glog("+a+")");return g.LOG_TABLE[a]},gexp:function(a){for(;0>a;)a+=255;for(;a>=256;)a-=255;return g.EXP_TABLE[a]},EXP_TABLE:new Array(256),LOG_TABLE:new Array(256)},h=0;8>h;h++)g.EXP_TABLE[h]=1<<h;for(var h=8;256>h;h++)g.EXP_TABLE[h]=g.EXP_TABLE[h-4]^g.EXP_TABLE[h-5]^g.EXP_TABLE[h-6]^g.EXP_TABLE[h-8];for(var h=0;255>h;h++)g.LOG_TABLE[g.EXP_TABLE[h]]=h;i.prototype={get:function(a){return this.num[a]},getLength:function(){return this.num.length},multiply:function(a){for(var b=new Array(this.getLength()+a.getLength()-1),c=0;c<this.getLength();c++)for(var d=0;d<a.getLength();d++)b[c+d]^=g.gexp(g.glog(this.get(c))+g.glog(a.get(d)));return new i(b,0)},mod:function(a){if(this.getLength()-a.getLength()<0)return this;for(var b=g.glog(this.get(0))-g.glog(a.get(0)),c=new Array(this.getLength()),d=0;d<this.getLength();d++)c[d]=this.get(d);for(var d=0;d<a.getLength();d++)c[d]^=g.gexp(g.glog(a.get(d))+b);return new i(c,0).mod(a)}},j.RS_BLOCK_TABLE=[[1,26,19],[1,26,16],[1,26,13],[1,26,9],[1,44,34],[1,44,28],[1,44,22],[1,44,16],[1,70,55],[1,70,44],[2,35,17],[2,35,13],[1,100,80],[2,50,32],[2,50,24],[4,25,9],[1,134,108],[2,67,43],[2,33,15,2,34,16],[2,33,11,2,34,12],[2,86,68],[4,43,27],[4,43,19],[4,43,15],[2,98,78],[4,49,31],[2,32,14,4,33,15],[4,39,13,1,40,14],[2,121,97],[2,60,38,2,61,39],[4,40,18,2,41,19],[4,40,14,2,41,15],[2,146,116],[3,58,36,2,59,37],[4,36,16,4,37,17],[4,36,12,4,37,13],[2,86,68,2,87,69],[4,69,43,1,70,44],[6,43,19,2,44,20],[6,43,15,2,44,16],[4,101,81],[1,80,50,4,81,51],[4,50,22,4,51,23],[3,36,12,8,37,13],[2,116,92,2,117,93],[6,58,36,2,59,37],[4,46,20,6,47,21],[7,42,14,4,43,15],[4,133,107],[8,59,37,1,60,38],[8,44,20,4,45,21],[12,33,11,4,34,12],[3,145,115,1,146,116],[4,64,40,5,65,41],[11,36,16,5,37,17],[11,36,12,5,37,13],[5,109,87,1,110,88],[5,65,41,5,66,42],[5,54,24,7,55,25],[11,36,12],[5,122,98,1,123,99],[7,73,45,3,74,46],[15,43,19,2,44,20],[3,45,15,13,46,16],[1,135,107,5,136,108],[10,74,46,1,75,47],[1,50,22,15,51,23],[2,42,14,17,43,15],[5,150,120,1,151,121],[9,69,43,4,70,44],[17,50,22,1,51,23],[2,42,14,19,43,15],[3,141,113,4,142,114],[3,70,44,11,71,45],[17,47,21,4,48,22],[9,39,13,16,40,14],[3,135,107,5,136,108],[3,67,41,13,68,42],[15,54,24,5,55,25],[15,43,15,10,44,16],[4,144,116,4,145,117],[17,68,42],[17,50,22,6,51,23],[19,46,16,6,47,17],[2,139,111,7,140,112],[17,74,46],[7,54,24,16,55,25],[34,37,13],[4,151,121,5,152,122],[4,75,47,14,76,48],[11,54,24,14,55,25],[16,45,15,14,46,16],[6,147,117,4,148,118],[6,73,45,14,74,46],[11,54,24,16,55,25],[30,46,16,2,47,17],[8,132,106,4,133,107],[8,75,47,13,76,48],[7,54,24,22,55,25],[22,45,15,13,46,16],[10,142,114,2,143,115],[19,74,46,4,75,47],[28,50,22,6,51,23],[33,46,16,4,47,17],[8,152,122,4,153,123],[22,73,45,3,74,46],[8,53,23,26,54,24],[12,45,15,28,46,16],[3,147,117,10,148,118],[3,73,45,23,74,46],[4,54,24,31,55,25],[11,45,15,31,46,16],[7,146,116,7,147,117],[21,73,45,7,74,46],[1,53,23,37,54,24],[19,45,15,26,46,16],[5,145,115,10,146,116],[19,75,47,10,76,48],[15,54,24,25,55,25],[23,45,15,25,46,16],[13,145,115,3,146,116],[2,74,46,29,75,47],[42,54,24,1,55,25],[23,45,15,28,46,16],[17,145,115],[10,74,46,23,75,47],[10,54,24,35,55,25],[19,45,15,35,46,16],[17,145,115,1,146,116],[14,74,46,21,75,47],[29,54,24,19,55,25],[11,45,15,46,46,16],[13,145,115,6,146,116],[14,74,46,23,75,47],[44,54,24,7,55,25],[59,46,16,1,47,17],[12,151,121,7,152,122],[12,75,47,26,76,48],[39,54,24,14,55,25],[22,45,15,41,46,16],[6,151,121,14,152,122],[6,75,47,34,76,48],[46,54,24,10,55,25],[2,45,15,64,46,16],[17,152,122,4,153,123],[29,74,46,14,75,47],[49,54,24,10,55,25],[24,45,15,46,46,16],[4,152,122,18,153,123],[13,74,46,32,75,47],[48,54,24,14,55,25],[42,45,15,32,46,16],[20,147,117,4,148,118],[40,75,47,7,76,48],[43,54,24,22,55,25],[10,45,15,67,46,16],[19,148,118,6,149,119],[18,75,47,31,76,48],[34,54,24,34,55,25],[20,45,15,61,46,16]],j.getRSBlocks=function(a,b){var c=j.getRsBlockTable(a,b);if(void 0==c)throw new Error("bad rs block @ typeNumber:"+a+"/errorCorrectLevel:"+b);for(var d=c.length/3,e=[],f=0;d>f;f++)for(var g=c[3*f+0],h=c[3*f+1],i=c[3*f+2],k=0;g>k;k++)e.push(new j(h,i));return e},j.getRsBlockTable=function(a,b){switch(b){case d.L:return j.RS_BLOCK_TABLE[4*(a-1)+0];case d.M:return j.RS_BLOCK_TABLE[4*(a-1)+1];case d.Q:return j.RS_BLOCK_TABLE[4*(a-1)+2];case d.H:return j.RS_BLOCK_TABLE[4*(a-1)+3];default:return void 0}},k.prototype={get:function(a){var b=Math.floor(a/8);return 1==(1&this.buffer[b]>>>7-a%8)},put:function(a,b){for(var c=0;b>c;c++)this.putBit(1==(1&a>>>b-c-1))},getLengthInBits:function(){return this.length},putBit:function(a){var b=Math.floor(this.length/8);this.buffer.length<=b&&this.buffer.push(0),a&&(this.buffer[b]|=128>>>this.length%8),this.length++}};var l=[[17,14,11,7],[32,26,20,14],[53,42,32,24],[78,62,46,34],[106,84,60,44],[134,106,74,58],[154,122,86,64],[192,152,108,84],[230,180,130,98],[271,213,151,119],[321,251,177,137],[367,287,203,155],[425,331,241,177],[458,362,258,194],[520,412,292,220],[586,450,322,250],[644,504,364,280],[718,560,394,310],[792,624,442,338],[858,666,482,382],[929,711,509,403],[1003,779,565,439],[1091,857,611,461],[1171,911,661,511],[1273,997,715,535],[1367,1059,751,593],[1465,1125,805,625],[1528,1190,868,658],[1628,1264,908,698],[1732,1370,982,742],[1840,1452,1030,790],[1952,1538,1112,842],[2068,1628,1168,898],[2188,1722,1228,958],[2303,1809,1283,983],[2431,1911,1351,1051],[2563,1989,1423,1093],[2699,2099,1499,1139],[2809,2213,1579,1219],[2953,2331,1663,1273]],o=function(){var a=function(a,b){this._el=a,this._htOption=b};return a.prototype.draw=function(a){function g(a,b){var c=document.createElementNS("http://www.w3.org/2000/svg",a);for(var d in b)b.hasOwnProperty(d)&&c.setAttribute(d,b[d]);return c}var b=this._htOption,c=this._el,d=a.getModuleCount();Math.floor(b.width/d),Math.floor(b.height/d),this.clear();var h=g("svg",{viewBox:"0 0 "+String(d)+" "+String(d),width:"100%",height:"100%",fill:b.colorLight});h.setAttributeNS("http://www.w3.org/2000/xmlns/","xmlns:xlink","http://www.w3.org/1999/xlink"),c.appendChild(h),h.appendChild(g("rect",{fill:b.colorDark,width:"1",height:"1",id:"template"}));for(var i=0;d>i;i++)for(var j=0;d>j;j++)if(a.isDark(i,j)){var k=g("use",{x:String(i),y:String(j)});k.setAttributeNS("http://www.w3.org/1999/xlink","href","#template"),h.appendChild(k)}},a.prototype.clear=function(){for(;this._el.hasChildNodes();)this._el.removeChild(this._el.lastChild)},a}(),p="svg"===document.documentElement.tagName.toLowerCase(),q=p?o:m()?function(){function a(){this._elImage.src=this._elCanvas.toDataURL("image/png"),this._elImage.style.display="block",this._elCanvas.style.display="none"}function d(a,b){var c=this;if(c._fFail=b,c._fSuccess=a,null===c._bSupportDataURI){var d=document.createElement("img"),e=function(){c._bSupportDataURI=!1,c._fFail&&_fFail.call(c)},f=function(){c._bSupportDataURI=!0,c._fSuccess&&c._fSuccess.call(c)};return d.onabort=e,d.onerror=e,d.onload=f,d.src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAHElEQVQI12P4//8/w38GIAXDIBKE0DHxgljNBAAO9TXL0Y4OHwAAAABJRU5ErkJggg==",void 0}c._bSupportDataURI===!0&&c._fSuccess?c._fSuccess.call(c):c._bSupportDataURI===!1&&c._fFail&&c._fFail.call(c)}if(this._android&&this._android<=2.1){var b=1/window.devicePixelRatio,c=CanvasRenderingContext2D.prototype.drawImage;CanvasRenderingContext2D.prototype.drawImage=function(a,d,e,f,g,h,i,j){if("nodeName"in a&&/img/i.test(a.nodeName))for(var l=arguments.length-1;l>=1;l--)arguments[l]=arguments[l]*b;else"undefined"==typeof j&&(arguments[1]*=b,arguments[2]*=b,arguments[3]*=b,arguments[4]*=b);c.apply(this,arguments)}}var e=function(a,b){this._bIsPainted=!1,this._android=n(),this._htOption=b,this._elCanvas=document.createElement("canvas"),this._elCanvas.width=b.width,this._elCanvas.height=b.height,a.appendChild(this._elCanvas),this._el=a,this._oContext=this._elCanvas.getContext("2d"),this._bIsPainted=!1,this._elImage=document.createElement("img"),this._elImage.style.display="none",this._el.appendChild(this._elImage),this._bSupportDataURI=null};return e.prototype.draw=function(a){var b=this._elImage,c=this._oContext,d=this._htOption,e=a.getModuleCount(),f=d.width/e,g=d.height/e,h=Math.round(f),i=Math.round(g);b.style.display="none",this.clear();for(var j=0;e>j;j++)for(var k=0;e>k;k++){var l=a.isDark(j,k),m=k*f,n=j*g;c.strokeStyle=l?d.colorDark:d.colorLight,c.lineWidth=1,c.fillStyle=l?d.colorDark:d.colorLight,c.fillRect(m,n,f,g),c.strokeRect(Math.floor(m)+.5,Math.floor(n)+.5,h,i),c.strokeRect(Math.ceil(m)-.5,Math.ceil(n)-.5,h,i)}this._bIsPainted=!0},e.prototype.makeImage=function(){this._bIsPainted&&d.call(this,a)},e.prototype.isPainted=function(){return this._bIsPainted},e.prototype.clear=function(){this._oContext.clearRect(0,0,this._elCanvas.width,this._elCanvas.height),this._bIsPainted=!1},e.prototype.round=function(a){return a?Math.floor(1e3*a)/1e3:a},e}():function(){var a=function(a,b){this._el=a,this._htOption=b};return a.prototype.draw=function(a){for(var b=this._htOption,c=this._el,d=a.getModuleCount(),e=Math.floor(b.width/d),f=Math.floor(b.height/d),g=['<table style="border:0;border-collapse:collapse;">'],h=0;d>h;h++){g.push("<tr>");for(var i=0;d>i;i++)g.push('<td style="border:0;border-collapse:collapse;padding:0;margin:0;width:'+e+"px;height:"+f+"px;background-color:"+(a.isDark(h,i)?b.colorDark:b.colorLight)+';"></td>');g.push("</tr>")}g.push("</table>"),c.innerHTML=g.join("");var j=c.childNodes[0],k=(b.width-j.offsetWidth)/2,l=(b.height-j.offsetHeight)/2;k>0&&l>0&&(j.style.margin=l+"px "+k+"px")},a.prototype.clear=function(){this._el.innerHTML=""},a}();QRCode=function(a,b){if(this._htOption={width:256,height:256,typeNumber:4,colorDark:"#000000",colorLight:"#ffffff",correctLevel:d.H},"string"==typeof b&&(b={text:b}),b)for(var c in b)this._htOption[c]=b[c];"string"==typeof a&&(a=document.getElementById(a)),this._android=n(),this._el=a,this._oQRCode=null,this._oDrawing=new q(this._el,this._htOption),this._htOption.text&&this.makeCode(this._htOption.text)},QRCode.prototype.makeCode=function(a){this._oQRCode=new b(r(a,this._htOption.correctLevel),this._htOption.correctLevel),this._oQRCode.addData(a),this._oQRCode.make(),this._el.title=a,this._oDrawing.draw(this._oQRCode),this.makeImage()},QRCode.prototype.makeImage=function(){"function"==typeof this._oDrawing.makeImage&&(!this._android||this._android>=3)&&this._oDrawing.makeImage()},QRCode.prototype.clear=function(){this._oDrawing.clear()},QRCode.CorrectLevel=d}();
+  window.onerror = function(msg, url, lineNo, columnNo, error) {
+            console.log("Error Catch : window.onerror - funtion fail is " + lcFuntion);
+            var string = msg.toLowerCase();
+            var substring = "script error";
+            if (string.indexOf(substring) > -1) {
+                console.log('Script Error: See Browser Console for Detail');
+            } else {
+                var message = [
+                    'Message: ' + msg,
+                    'URL: ' + url,
+                    'Line: ' + lineNo,
+                    'Column: ' + columnNo,
+                    'Error Object: ' + JSON.stringify(error)
+                ].join(' - ')
+
+                  // $('#message').fadeOut(350, function() {
+                          $('.mainnotif').empty();
+                     // });
+                console.log(message)
+                // appMain.NotifClose();
+                appMain.GetNotif("Internal App Problem", message, "00");
+                $('#loader').hide();
+                    appOrd.senderror(message)
+            }
+            return false;
+            };
+
+//-----------------------------------------------begin load js here------------------------------//
+var appJs = {
+    GetContent: function(Obj) {
+        lcFuntion = "GetContent";
+        console.log("Function run : " + lcFuntion);
+    },
+    AjaxGetContent: function(Obj) {
+       lcFuntion = "AjaxGetContent";
+        console.log("Function run : " + lcFuntion);
+        $.ajax({
+            url: appget.GetAddress(Obj), // authenticate your user
+            cache: false,
+            beforeSend: function(xhr) {
+                //            $('#loader').show()
+            },
+            success: function(response) {
+                localStorage.setItem('Appcon', response);
+                appJs.AppSetContent();
+            },
+            error: function(XMLHttpRequest, textStatus, errorThrown) {
+                appget.receivedError(XMLHttpRequest);
+            }
+        });
+
+
+    },
+    AppSetContent: function() {
+        lcFuntion = "AppSetContent";
+        console.log("Function run : " + lcFuntion);
+        if ($(".mainapp").length > 0) {
+            $(".mainapp").html(localStorage.getItem('Appcon'));
+        }
+
+        myApp = new Framework7({
+            animateNavBackIcon: true,
+            // Enable templates auto precompilation
+            precompileTemplates: true,
+            // Enabled pages rendering using Template7
+            swipeBackPage: true,
+            pushState: true,
+            template7Pages: true,
+            material: true
+        });
+        $$ = Dom7;
+        mainView = myApp.addView('.view-main');
+        $('.progress').addClass('hide');
+        $('.mainsplash').addClass('hide');
+         $('#loader').hide();
+        appMain.initialize();
+    }
+}
+
+
+//-----------------------------------------------begin load main here------------------------------//
+var appMain = {
+    initialize: function() {
+        lcFuntion = "initialize";
+        console.log("Function run : " + lcFuntion);
+        this.bindEvents();
+    },
+    bindEvents: function() {
+        lcFuntion = "bindEvents";
+        console.log("Function run : " + lcFuntion);
+        document.addEventListener('deviceready', this.onDeviceReady, false);
+       
+    },
+    onDeviceReady: function() {
+        lcFuntion = "onDeviceReady";
+        console.log("Function run : " + lcFuntion);
+        $('form').submit(function(ev) {
+            ev.preventDefault();
+        });
+       // alert("01")
+        app.initialize(); //TODO
+         
+        appMain.CheckLogin();
+             //       alert("04")
+
+
+    },SetDefault : function(){
+      lcFuntion = "SetDefault";
+        console.log("Function run : " + lcFuntion);
+            $('.pages').addClass("no-navbar")
+            $('.pages').removeClass("navbar-through")
+            mainView.hideNavbar();
+            mainView.hideToolbar();
+            $('.speed-dial').hide();
+            appMain.GetPage('#LandingPage');
+    
+    },
+    CheckLogin: function() {
+        lcFuntion = "CheckLogin";
+        console.log("Function run : " + lcFuntion);
+        var LcUser = JSON.parse(localStorage.getItem("SetUserData"));
+        console.log("User Data : " + JSON.stringify(LcUser));
+        if (LcUser != null) {
+            if (LcUser.apptkn != null) {
+                if (LcUser.id != 0 && LcUser.userid != null) {
+                    $('.pages').addClass("navbar-through")
+                    $('.pages').removeClass("no-navbar")
+                    mainView.showNavbar();
+                    mainView.hideToolbar();
+                    $('.speed-dial').show();
+                    lcInit = 'main';
+                    appOrd.initialize();
+                    LcBackPage = "Exit"
+                    appMain.GetPage('#PageHome');
+                    appMain.CheckUpdate();
+                } else {
+                    appMain.SetDefault();
+                }
+            } else {
+               appMain.SetDefault();
+            }
+
+        } else {
+            appMain.SetDefault();
+        }
+
+    },
+    SetValid: function(Obj) {
+        lcFuntion = "SetValid";
+        console.log("Function run : " + lcFuntion);
+        $(Obj).validate({
+            callbacks: {},
+            //              lcdataitem: lcStore,       
+        });
+
+    },
+    ProCesData: function(lcdata, lcaction) {
+        lcFuntion = "ProCesData";
+        console.log("Function run : " + lcFuntion);
+        console.log("data response dari server :" + JSON.stringify(lcdata))
+        var rsltCcode = "00",
+            lcnotif = "Fail",
+            lcDetail;
+        lcCode = parseFloat(lcdata.rsltcode)
+        if (lcdata != null) {
+            if (lcCode < 10) {
+                rsltCcode = "01"
+                lcnotif = "Success"
+                if (lcCode <= 4) {
+                    basicapp.GetSetPasscode();
+                    switch (lcCode) {
+                        case 0:
+                            console.log("Register 00 :" + JSON.stringify(lcdata.rsltdata));
+                            localStorage.setItem("SetUserData", JSON.stringify(lcdata.rsltdata));
+                            LcBackPage = "#LandingPage"
+                            appMain.GetPage("#PagePasscode");
+                            //                                  showPage('PageLogin');
+                            //                                  $("#lcemail").val(lcdet.lcemail);
+                            $("#fcRegis")[0].reset();
+                            break;
+                        case 1:
+                            console.log("Login Success Pass code 01 :" + JSON.stringify(lcdata.rsltdata))
+                            localStorage.setItem("SetUserData", JSON.stringify(lcdata.rsltdata));
+                            appMain.CheckLogin();
+                            break;
+                        case 2:
+                            break;
+                        case 3:
+                            console.log("Login Success Pass code 03 : data password saved")
+                            localStorage.setItem("SetUserData", JSON.stringify(lcdata.rsltdata));
+                            appMain.CheckLogin();
+                            break;
+                        case 4:
+
+                            console.log("action trigger :" + lcaction);
+                            if (lcaction == "member-getpass") {
+                                console.log("OTP Created Pass code 04 :" + JSON.stringify(lcdata.rsltdata));
+                                localStorage.setItem("SetUserData", JSON.stringify(lcdata.rsltdata));
+                                LcBackPage = "#LandingPage"
+                                appMain.GetPage('#PagePasscode');
+                            } else {
+                                console.log("Login Success Pass code 04 :" + JSON.stringify(lcdata.rsltdata))
+                                localStorage.setItem("SetUserData", JSON.stringify(lcdata.rsltdata));
+                                //                                LcBackPage = "#PageHome"
+                                appMain.GetPage('#PageChpass');
+                            }
+
+                            //                                  appMain.CheckLogin();
+                            break;
+                        case 6:
+
+                            break;
+                        default:
+                            answer = "Massive or Tiny?";
+                    }
+                }
+            }
+
+            appMain.GetNotif(lcnotif, lcdata.rsltmsg, rsltCcode)
+
+        } else {
+            appMain.GetNotif(lcnotif, "Cannot read data from server", rsltCcode);
+        }
+        $('#loader').hide();
+    },
+    GetSendReq: function(lcdata, lcadd, handleData) {
+        lcFuntion = "GetSendReq";
+        console.log("Function run : " + lcFuntion);
+
+        $.ajax({
+            type: "POST",
+            // url: lcUrl + lcadd,
+            url: basicapp.GetContentUrl(lcadd),
+            timeout: lctimeout,
+            data: JSON.stringify(lcdata),
+            beforeSend: function(xhr) {
+                xhr.setRequestHeader("Accept", "application/json");
+                xhr.setRequestHeader("Content-Type", "application/json"); // contentType: "application/x-www-form-urlencoded; charset=UTF-8", //sending
+                $('#loader').show();
+            },
+            success: function(response, status, textStatus) {
+                // console.log("Value of testStatus:- " + JSON.stringify(textStatus));
+                handleData(response)
+            },
+
+            // success: function(response) {
+            //     handleData(response)
+            //         //                   appMain.ProCesData(response,lcadd);
+            // }, //timeout:3000,
+            error: function(jqXhr, textStatus, errorThrown) {
+                appMain.getError(jqXhr)
+            }
+        });
+    },
+    GetNotif: function(lcmsg, lcbody, lckode) {
+        lcFuntion = "GetNotif";
+        console.log("Function run : " + lcFuntion);
+        var lcclass;
+        if (lckode == '00') {
+            lcclass = "errorbox"
+            lcimg = "error.png"
+            lcClick = "appMain.NotifClose(this)"
+        } else {
+            lcClick = "appMain.NotifClose(this)"
+            lcclass = "successbox"
+            lcimg = "check.png"
+        }
+
+        $('<div class="notify ' + lcclass + '" onclick="' + lcClick + '">' + '<h1>' + lcmsg + '!</h1>' + ' <span class="alerticon blink"><img src="images/' + lcimg + '" alt="checkmark" /></span>' + ' <p>' + lcbody + '.</p> </div>').prependTo('.mainnotif');
+
+        appMain.NotifShow();
+    },
+    NotifShow: function() {
+        lcFuntion = "NotifShow";
+        console.log("Function run : " + lcFuntion);
+        $('#message').fadeIn(350, function() {
+            $('#message').show();
+        });
+        $('#loader').hide();
+    },
+    NotifClose: function(Obj) {
+        lcFuntion = "NotifClose";
+        console.log("Function run : " + lcFuntion);
+        $('#message').fadeOut(350, function() {
+            $(Obj).remove();
+        });
+        $('#loader').hide();
+    },
+    GetPage: function(Obj) {
+
+        lcFuntion = "GetPage";
+        console.log("Function run : " + lcFuntion);
+
+        appMain.closesped();
+        $("#detailItm").fadeOut("slow");
+
+        // alert(Obj)
+
+        if (Obj == "#PageChpass") {
+            LcBackPage = Obj
+        }
+
+
+        if (Obj == "#PageGetpass") {
+            //              appMain.CheckLogin();
+            LcBackPage = "#LandingPage"
+        }
+        if (Obj == "#LandingPage") {
+            LcBackPage = "Exit"
+        }
+        if (Obj == "#PageListOrder") {
+            LcBackPage = "#PageHome"
+        }
+
+        if (Obj == "#PageProfile") {
+            LcBackPage = "#PageHome"
+        }
+        if (Obj == "#PageOrd") {
+            LcBackPage = "#PageHome"
+        }
+
+        if (Obj == "#PageHome") {
+            LcBackPage = "Exit"
+        }
+
+
+
+        myApp.showTab(Obj);
+
+    },
+    GetPass: function() {
+        lcFuntion = "GetPass";
+        console.log("Function run : " + lcFuntion);
+        lcAction = "app-getpass";
+        lcData = JSON.parse(localStorage.getItem("SetUserData"));
+
+        appMain.GetSendReq(lcData, lcAction, function(output) {
+            appMain.ProCesData(output, lcAction);
+            $('#loader').hide();
+        });
+
+    },
+
+    getError: function(obj) {
+        lcFuntion = "getError";
+        console.log("Function run : " + lcFuntion + " -  " + obj.readyState + " - " + obj.statusText);
+
+        if (obj.readyState < 4) { // while waiting response from server
+
+            appMain.GetNotif("Connection Problem", "Koneksi ke server terputus", "00");
+
+        } else if (obj.readyState === 4) {
+            console.log(obj.status)
+                // 4 = Response from server has been completely loaded.
+            if (obj.status === 200 && obj.status < 300) { // http status between 200 to 299 are all successful
+                console.log("No data")
+                appMain.GetNotif("Content Missing", "Tidak dapat menerima data", "00");
+                // console.log(obj.responseText);
+            } else if (obj.status >= 400 && obj.status < 500) {
+                console.log("Client Error")
+                appMain.GetNotif("Connection Refused", "Koneksi ke server terputus", "00");
+            } else if (obj.status >= 500) {
+                console.log("Server Error")
+                appMain.GetNotif("Maintenance ", "Server sedang dalam perbaikan cobalah beberapa saat lagi", "00");
+            } else {
+                appMain.GetNotif("Content Missing", "Tidak dapat menerima data", "00");
+            }
+
+        }
+
+
+        $('#loader').hide();
+
+
+    },
+    closesped: function() {
+        $$('.speed-dial.speed-dial-opened').removeClass('speed-dial-opened');
+    },
+    inputFocus: function() {
+        $('.speed-dial').hide();
+    },
+    inputBlur: function() {
+        $('.speed-dial').show();
+    },
+    GetProfile: function() {
+        var LcUser = JSON.parse(localStorage.getItem("SetUserData"));
+        console.log(LcUser.notlp)
+        myApp.showTab("#PageProfile")
+        LcBackPage = "#PageHome"
+    
+        $(".lcnm").text(LcUser.userid)
+        $(".lctlp").text(LcUser.notlp)
+    },
+    CheckUpdate: function() {
+        lcFuntion = "CheckUpdate";
+        console.log("Function run : " + lcFuntion);
+        lcAction = "app-update";
+        lcData = JSON.parse(localStorage.getItem("SetUserData"));
+       // lcDetData = {
+       //     "appver": lcData.appver
+       // };
+          
+        appOrd.GetReqServ(lcData, lcAction, function(output) {
+            
+            var OldAppVersion = lcData.appver;
+            var lastAppVersion = output.appver;
+            console.log(OldAppVersion +'--'+lastAppVersion)
+             $('#loader').hide();
+            if(OldAppVersion != lastAppVersion){
+                $(".mainapp").empty();
+                $("#app-getjs").empty();
+                localStorage.removeItem("SetUserData")
+                localStorage.setItem("SetUserData", JSON.stringify(output));
+                localStorage.removeItem('Appcon');
+                localStorage.removeItem('app-getjs');
+                apiCont = "app-getjs"
+                appget.AjaxGetJs(apiCont)
+            }
+            
+            
+            
+         
+            //lcCode = parseFloat(output.rsltcode)
+           // if (lcCode == "00"){
+             console.log("local : "+localStorage.getItem("SetUserData"));
+             console.log("server : "+JSON.stringify(output))
+            
+                  // localStorage.removeItem("SetUserData")
+                  //  localStorage.setItem("SetUserData", JSON.stringify(lcCode.rsltdata));
+                   
+                //localStorage.removeItem('Appcon');
+                //localStorage.removeItem('app-getjs');
+                //apiCont = "app-getjs"
+                //appget.AjaxGetJs(apiCont)
+            //}
+
+        });
+    }
+
+}
+
+//-----------------------------------------------begin load app js here------------------------------//
+var app = {
+    initialize: function() {
+        app.setupPush();
+    },
+    setupPush: function() {
+        console.log('calling push init');
+        var push = PushNotification.init({
+            "android": {
+                "senderID": "468739384348",
+            },
+            "browser": {},
+            "ios": {
+                "sound": true,
+                "vibration": true,
+                "badge": true
+            },
+            "windows": {}
+        });
+        console.log('after init');
+
+        push.on('registration', function(data) {
+            console.log('registration event: ' + data.registrationId);
+
+            var oldRegId = localStorage.getItem('registrationId');
+            if (oldRegId !== data.registrationId) {
+                localStorage.setItem('registrationId', data.registrationId);
+            }
+        });
+        push.on('error', function(e) {
+            console.log("push error = " + e.message);
+        });
+        push.on('notification', function(data) {
+            console.log('notification event');
+            lctype = data.additionalData.id
+
+
+            var myLcUser = JSON.parse(localStorage.getItem("SetUserData"));
+            console.log("User Data : " + JSON.stringify(data));
+            if (myLcUser != null) {
+                if (myLcUser.id != 0 && myLcUser.userid != null) {
+                    if (lctype == '01') {
+                        navigator.notification.alert(
+                            data.message, // message
+                            null, // callback
+                            data.title, // title
+                            'Ok' // buttonName
+                        );
+						
+         
+
+                        //lcAction = "app-getdata";
+                        //lcData = JSON.parse(localStorage.getItem("SetUserData"));
+                        //lcDetData = {
+                         //   "lcidmember": lcData.id,
+                          //  "lcstat": "2",
+                           // "lctoken": lcData.apptkn
+                        //};
+
+
+                        $('.tabProgres').trigger('click')
+
+                       // appOrd.GetReqServ(lcDetData, lcAction, function(output) {
+                        //localStorage.removeItem("lisOforder")
+                         //  appOrd.setOrder(output);
+                          // alert(JSON.stringify(output))
+                           // $('#loader').hide();
+                            appMain.GetPage('#PageOrd');
+                            //myApp.showTab("#tabProgres");
+                        //});
+
+                           //lcAction = "app-getdata";
+                        //lcDetData = {
+                         //   "lcidmember": myLcUser.id,
+                          //  "lcstat": "1",
+                           // "lctoken": myLcUser.apptkn
+                        //};
+                        //appOrd.GetReqServ(lcDetData, lcAction, function(output) {
+                         //   localStorage.removeItem("lisOforder")
+                          //  alert(JSON.stringify(output))
+                           // appOrd.setOrder(output);
+                            //appMain.GetPage('#PageOrd');
+                            //myApp.showTab("#tabProgres");
+                            //$('#loader').hide();
+                        //});
+                    } else if (lctype == '02') {
+                        navigator.notification.alert(
+                            data.message, // message
+                            null, // callback
+                            data.title, // title
+                            'Ok' // buttonName
+                        );
+                        //lcDiv = 'setOrder' + data.additionalData.orderId
+                        //$(".btnTab").removeClass("btnTabact")
+                        //$(".tabComplete").addClass("btnTabact")
+                       // mcDiv = $("#" + lcDiv);
+                        //lcAction = "app-getdata";
+                        //lcData = JSON.parse(localStorage.getItem("SetUserData"));
+                        //lcDetData = {
+                            //"lcidmember": lcData.id,
+                           // "lcstat": "3",
+                          //  "lctoken": lcData.apptkn
+                        //};
+                        $('.tabComplete').trigger('click')
+                       // appOrd.GetReqServ(lcDetData, lcAction, function(output) {
+                        //    appOrd.SetOrderDet(output);
+                         //   $('#loader').hide();
+                            appMain.GetPage('#PageOrd');
+                           // myApp.showTab("#tabComplete");
+                            //mcDiv.remove();
+                        //});
+                    }
+
+                }
+
+
+            }
+
+        });
+    }
+};
+
+
+
+//-----------------------------------------------begin load validation here------------------------------//
+
+(function($) {
+    "use strict";
+
+    $.fn.validate = function(config, text) {
+
+        //Objects in window window.validate, window.send_form
+        window.validate = new Array();
+
+        /* main options
+         ----------------------------------------------------------------------------------------------------------------*/
+        var options = {
+            type: "ajax", // or ajax
+            usesweetalerts: false,
+            success_texth: "Thank you!",
+            success_textp: "Your message has been sent!",
+            style_user: "",
+            lcdataitem: "",
+            style_base: "<style>.input_error{color:red!important;}</style>",
+            class_error: "input_error",
+            validators: {
+                reg: {
+                    //  lcemail   : /^([a-z0-9_\.\-\+]+)@([\da-z\.\-]+)\.([a-z\.]{2,6})$/i,
+                    //    url         : /(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/,
+                    lcnotlp: /^[0-9]{12,14}$/,
+                    //    date    : /^(\d{1,2})\/(\d{1,2})\/(\d{4})$/,
+                    lcuser: /^[A-Za-z]{3,}$/,
+                    //    lcpass      : /^[A-Za-z]+$/
+                    lcpass: /^(?=.*[0-9])(?=.*[!@#$%^&*_=+-/])[a-zA-Z0-9!@#$%^&*_=+-/]{8,}$/,
+                    //           lctkn    : /^(?=.*[0-9])(?=.*[!@#$%^&*_=+-/])[a-zA-Z0-9!@#$%^&*_=+-/]{8,}$/,   
+                },
+                text: {
+                    lcnotlp: "Please enter a valid phone number",
+                    lcuser: "Input hanya huruf & minimal 3 huruf",
+                    lcpass: "Please enter a correct password",
+                }
+            },
+            callbacks: {}
+        }
+
+        $.extend(options.validators.text, text);
+        $.extend(options, config);
+
+        $(options.style_base +
+            "<style>" + options.style_user + "</style>").appendTo($('head'));
+
+        /* Callback types  ------------------------------------------------------------------------------------------*/
+        var formType = {
+            standart: function($form) {
+                var res = false;
+                if (!checkForm($form)) {
+                    res = true;
+                }
+
+                return res;
+            },
+            ajax: function($form) {
+                var res = false,
+                    action = $form.attr('action'),
+                    type = $form.attr('method'),
+                    serialized = $form.serializeArray(),
+                    s = '',
+                    data = {}; //data = $form.serialize();
+                window.send_form = $form;
+                if (!checkForm($form)) {
+
+                    var lcdata = JSON.parse(localStorage.getItem("SetUserData"));
+
+                    for (s in serialized) {
+                        data[serialized[s]['name']] = serialized[s]['value']
+                    }
+
+                    console.log($form.attr('id'))
+                    console.log(JSON.stringify(data))
+
+
+                    if ($form.attr('id') == 'fcChpass') {
+                        console.log("local store: " + localStorage.getItem("SetUserData"))
+                        $.extend(true, data, lcdata);
+                    } else if ($form.attr('id') == 'fcOrder') {
+                        var lcDtOr, Subtot, lcary = [],
+                            lctot = 0,
+                            lcIdMember, lcToken, lacItem = JSON.parse(options.lcdataitem);
+                        $.each(lacItem, function(i, val) {
+                            lcary.push({
+                                "iditm": val.lcId,
+                                "eventid": val.lcEvId,
+                                "itmprice": val.lcPrice,
+                                "qtyitm": val.lcJum
+                            });
+                            lctot += val.lcPrice * val.lcJum;
+                        })
+                        Subtot = {
+                            "ordtotal": lctot
+                        }
+                        lcDtOr = {
+                            "orderDetail": lcary
+                        };
+                        lcIdMember = {
+                            "idmember": lcdata.id
+                        }
+                        lcToken = {
+                            "lctoken": lcdata.apptkn
+                        };
+                        $.extend(true, data, lcDtOr, Subtot, lcIdMember, lcToken);
+
+                    } else {
+                        var lcGcm = {};
+                        lcGcm = {
+                            "gcmcode": localStorage.getItem('registrationId')
+                        };
+                        //                      lcGcm = {"lcgcm":"mygcm"};
+                        $.extend(true, data, lcGcm);
+                    }
+                    console.log("data change pass: " + JSON.stringify(data))
+
+                    $.ajax({
+                        type: type,
+                        url: basicapp.GetContentUrl(action), //lcUrl + action,
+                        data: JSON.stringify(data),
+                        timeout: lctimeout,
+                        beforeSend: function(xhr) {
+                            xhr.setRequestHeader("Accept", "application/json");
+                            xhr.setRequestHeader("Content-Type", "application/json"); // contentType: "application/x-www-form-urlencoded; charset=UTF-8", //sending
+                            $('#loader').show();
+                        },
+                        success: function(response, status, textStatus) {
+                            if ($form.attr('id') == 'fcOrder') {
+                                //                                lcInit ='order item';
+                                appOrd.getProses(response, action)
+                            } else {
+                                appMain.ProCesData(response, action);
+                            }
+
+
+                            //getProses(JSON.stringify(data),response,action)
+
+                        }, //timeout:3000,
+                        error: function(jqXhr, textStatus, errorThrown) {
+                            console.log("Value of testStatus:- " + JSON.stringify(jqXhr));
+                            appMain.getError(jqXhr)
+                        }
+                    });
+                }
+
+                return res;
+            }
+        }
+
+
+
+
+
+        /* Test elements
+         ------------------------------------------------------------------------------------------*/
+        var check = function($element, key) {
+            return options.validators.reg[key].test($element.val());
+        };
+
+
+        var checkForm = function($form) {
+                var i = 0;
+                $form.find('[data-require]').each(function() {
+                    var $element = $(this),
+                        key = $element.data('require');
+                    $element.unbind("focus");
+                    $element.unbind("blur");
+                    //                $element.removeClass(options.class_error)
+                    //                errorText.remove($element);
+                    //                errorText.removeInWindow($element);
+                    if (!check($element, key)) {
+                        if (errorText.haveInWindow($element)[0])
+                            errorText.add($element, key, false);
+                        else
+                            errorText.add($element, key, true);
+                        i++;
+                    }
+
+                    $element.on('blur', function() {
+                        if (!check($element, key))
+                            errorText.add($element, key, true);
+                        else
+                            errorText.remove($element);
+                    });
+
+                    $element.focus(function() {
+                        if (!check($element, key))
+                            $(this).val("");
+                        else
+                            var info = errorText.removeInWindow($element);
+                        //                  if( info == "1") $(this).val("");
+                        //                  else if( info ) $(this).val(info);
+                        $element.removeClass(options.class_error)
+                    });
+
+                });
+                return i;
+            }
+            /* Show error text ------------------------------------------------------------------------------------------*/
+        var errorText = {
+            add: function($element, key, add) {
+                var message = options.validators.text[key];
+                if (add) errorText.addToWindow($element);
+                $element
+                    .addClass(options.class_error)
+                    .val(message);
+            },
+            remove: function($element) {
+                var res = errorText.haveInWindow($element);
+                if (res[0]) delete window.validate[res[1]];
+                $element
+                    .removeClass(options.class_error)
+            },
+            haveInWindow: function($element) {
+                var res = [false, 0],
+                    name = $element.attr('name');
+
+                $.each(window.validate, function(index) {
+                    if ($(this))
+                        if (name == $(this).attr('name')) {
+                            res = [true, index];
+                        };
+                });
+                return res;
+            },
+            addToWindow: function($element) {
+                var object = new Object(),
+                    name = $element.attr('name'),
+                    value = $element.val();
+
+                object.name = name;
+                object.value = value;
+
+                var res = errorText.haveInWindow($element);
+                if (!res[0])
+                    window.validate.push(object);
+                else if (window.validate[res[1]].value != value)
+                    window.validate[res[1]].value = value;
+            },
+            removeInWindow: function($element) {
+                var res = false,
+                    name = $element.attr('name'),
+                    value = $element.val();
+
+                $.each(window.validate, function() {
+                    if ($(this)) {
+                        var name_ = $(this).attr('name'),
+                            value_ = $(this).attr('value');
+                        if (name == name_ && value != value_) res = (value_ != "") ? value_ : (value_ == "") ? "1" : false;
+                    }
+                });
+
+                return res;
+            }
+        };
+
+
+        /* Submit form ------------------------------------------------------------------------------------------*/
+        this.each(function() {
+            var user_type = $(this).data('type') || options.type;
+            var type = (user_type == "standart") ? formType.standart($(this)) : (user_type == "ajax") ? formType.ajax($(this)) : formType.standart($(this));
+        });
+    };
+
+})(jQuery);
+
+
+//-----------------------------------------------begin basic setting js here------------------------------//
+
+var basicapp = { // Costum JS start init app function by R.Shandy K 08-222-41-777-12 ratex.shamdy@gmail.com 
+    // Application Constructor
+    initialize: function() {
+        this.bindEvents();
+    },
+    // Bind Event Listeners
+    // Bind any events that are required on startup. Common events are:
+    // 'load', 'deviceready', 'offline', and 'online'.
+    bindEvents: function() {
+        document.addEventListener('deviceready', this.onDeviceReady, false);
+    },
+    // deviceready Event Handler
+    // The scope of 'this' is the event. In order to call the 'receivedEvent'
+    // function, we must explicitly call 'app.receivedEvent(...);'
+    onDeviceReady: function() {
+        app.receivedEvent('deviceready');
+    },
+    // Update DOM on a Received Event
+    receivedEvent: function(id) {
+
+    },
+    GetImgUrl: function(Obj) {
+        // var lcurlimg="http://93.188.166.178:8080/images/"+Obj;
+        var lcurlimg = "images/item/" + Obj;
+        //var lcurlimg="http://156.67.216.211:8090/images/"+Obj;
+        return lcurlimg;
+    },
+    GetContentUrl: function(Url) {
+        var lcUrl = "http://172.16.10.41:8091/api/" + Url
+        //var lcUrl = "http://156.67.216.211:8091/Api/"+Url
+
+        // var lcUrl = 'http://192.168.43.186:8091/api/'+Url
+        // var lcUrl = "http://93.188.166.178:8090/api/"+Url
+        return lcUrl;
+    },
+    GetsetLimit: function() {
+        var width = document.body.clientWidth;
+        var height = document.body.clientHeight;
+        var sLimit = 6;
+        if (width < 360) {
+            sLimit = sLimit
+        } else {
+            sLimit = sLimit + 2
+        }
+        return sLimit;
+    },
+    GetContenClear: function() {
+
+        //localStorage.clear();
+
+    },
+    GetMenuSet: function() {
+        var active1 = false,
+            active2 = false,
+            active3 = false,
+            active4 = false,
+            upClass = 'toggle-up',
+            downClass = 'toggle-down';
+        $('.radial-menu').on('mousedown touchstart', function() {
+            var square = document.querySelector('.mask');
+
+            if (~square.className.indexOf(downClass)) {
+                square.className = square.className.replace(downClass, upClass);
+            } else {
+                square.className = square.className.replace(upClass, downClass);
+            }
+            if (!active1) $(this).find('.menu-item1').css({
+                'background-color': 'red',
+                'color': 'white',
+                'transform': 'translate(0px,90px)'
+            });
+            else $(this).find('.menu-item1').css({
+                'background-color': '#9cc13b',
+                'color': '#9cc13b',
+                'transform': 'none'
+            });
+
+            if (!active2) $(this).find('.menu-item2').css({
+                'background-color': 'green',
+                'color': 'white',
+                'transform': 'translate(60px,90px)'
+            });
+            else $(this).find('.menu-item2').css({
+                'background-color': '#9cc13b',
+                'color': '#9cc13b',
+                'transform': 'none'
+            });
+
+            if (!active3) $(this).find('.menu-item3').css({
+                'background-color': 'purple',
+                'color': 'white',
+                'transform': 'translate(120px,90px)'
+            });
+            else $(this).find('.menu-item3').css({
+                'background-color': '#9cc13b',
+                'color': '#9cc13b',
+                'transform': 'none'
+            });
+
+            if (!active4) {
+                $(this).find('.menu-item4').css({
+                    'background-color': '#f68029',
+                    'color': 'white',
+                    'transform': 'translate(180px,90px)'
+                })
+
+                lcStore = JSON.parse(localStorage.getItem("MyOrder"))
+                if (lcStore != null) {
+                    $(".mylistcart").addClass('blink');
+                    $(".mylistcart").css('color', 'orange');
+                } else {
+                    $(".mylistcart").css('color', 'white');
+                    $(".mylistcart").removeClass('blink');
+                }
+            } else {
+
+                $(this).find('.menu-item4').css({
+                    'background-color': '#9cc13b',
+                    'color': '#9cc13b',
+                    'transform': 'none'
+                });
+                $(".mylistcart").css('color', '#9cc13b');
+
+            };
+            active1 = !active1;
+            active2 = !active2;
+            active3 = !active3;
+            active4 = !active4;
+
+
+
+        });
+    },
+    GetSetPasscode: function() {
+        $("#demo-numpad-inline").empty()
+        $("#numpad-inline-container").empty()
+        var numpadInline = myApp.keypad({
+            input: '#demo-numpad-inline',
+            container: '#numpad-inline-container',
+            toolbar: false,
+            valueMaxLength: 4,
+            dotButton: false,
+            formatValue: function(p, value) {
+                value = value.toString();
+                return ('****').substring(0, value.length) + ('____').substring(0, 4 - value.length);
+            },
+            onChange: function(p, value) {
+                value = value.toString();
+                if (value.length === 4) {
+                    lcFuntion = "Validpass";
+                    console.log("Function run : " + lcFuntion);
+                    lcAction = "app-validpass"
+                    lcData = JSON.parse(localStorage.getItem("SetUserData"));
+                    lcPas = {
+                        "passcode": value
+                    };
+                    $.extend(true, lcData, lcPas);
+                    console.log("this data is :" + JSON.stringify(lcData))
+
+                    appMain.GetSendReq(lcData, lcAction, function(output) {
+                        appMain.ProCesData(output, lcAction);
+                        $('#loader').hide();
+                    });
+                }
+            }
+        });
+    }
+};
+
+
+//-----------------------------------------------begin load order js here------------------------------//
+
+var appOrd = { // Costum JS start init app function by R.Shandy K 08-222-41-777-12 ratex.shamdy@gmail.com 
+    initialize: function() {
+        lcFuntion = "initialize";
+        console.log("Function run : " + lcFuntion);
+        this.bindEvents();
+    },
+
+    bindEvents: function() {
+        lcFuntion = "bindEvents";
+        console.log("Function run : " + lcFuntion);
+
+        lcStore = JSON.parse(localStorage.getItem("MyOrder"))
+        if (lcStore != null) {
+            $(".mylistcart").css('color', '#f68029');
+            $(".mylistcart").addClass('blink');
+            appOrd.setListOrder(lcStore);
+        }
+
+      
+
+
+
+                        
+
+                      
+        appOrd.GetMenu();
+                               // alert("02")
+
+
+           
+        // localStorage.clear();
+       // basicapp.GetMenuSet();
+
+
+                               // alert("03")
+
+    },
+      GetMenu : function(){
+    lcFuntion = "GetMenu"; 
+        console.log("Function run : " + lcFuntion);
+         lcAction = "app-getmenu";
+         lcData = JSON.parse(localStorage.getItem("SetUserData"));
+        lcDetData = { "lcidmember": lcData.id, "lcstat": "1", "lctoken": lcData.apptkn };
+            appOrd.GetReqServ(lcDetData, lcAction, function(output) {
+
+                 console.log("Function run : " + JSON.stringify(output));
+                $.each(output,function(i,val){
+                    lcimg = basicapp.GetImgUrl(val.mnuicon)//lcurlimg+val.lcImg
+                        console.log("images is :"+lcimg);                 
+//                    lcContent ='<div class="mainMenu" id="'+val.id+'" style="background-image: url('+lcimg+')" data-page="PageListOne" onClick="appOrd.GetList(this)">'
+//                                +'</div>'
+                    lcContent ='<div class="dashmain" id="'+val.id+'" data-page="PageListOne" onClick="appOrd.GetList(this)">'
+                    +'<div class="dashmainimg lazy" id="lazy'+val.id+'"  data-src="'+lcimg+'"  ></div>'
+//                    style="background-image: url('+lcimg+')"
+//                    +'<span><i class="fa fa-home"></i></span></div>'
+                    +'<div class="dashmaindet">'
+                    +'<div class="dashmaindethead" > <b>'+val.desc+'</b></div>'
+                    +'<div class="dashmaindetsub"><small>'+val.addesc+'</small></div>'
+                    +'</div></div>'
+                    $('.dashmenu').append(lcContent);
+                      
+
+                    lcclass = 'lazy'+val.id;
+                    lcdiv = $("#"+lcclass)
+                    var lcsrc = lcdiv.data("src");
+                    lcdiv.css({"background-image":"url("+lcsrc+")", "background-size" : "cover"});
+                     $('#loader').hide();
+                });
+
+
+                 appOrd.GetSlide();
+
+            });
+    },
+    GetSlide : function(){
+        lcFuntion = "GetSlide"; 
+         console.log("Function run : " + lcFuntion);
+         lcAction = "app-getbanner";
+         lcData = JSON.parse(localStorage.getItem("SetUserData"));
+
+        lcDetData = { "lcidmember": lcData.id, "lcstat": "1", "lctoken": lcData.apptkn };
+            appOrd.GetReqServ(lcDetData, lcAction, function(output) {
+                $('.bannerslide').empty();
+                console.log("Slide data : "+JSON.stringify(output));
+                $.each(output,function(i,val){
+                      lcimg = basicapp.GetImgUrl(val.mnuicon)//lcurlimg+val.lcImg
+                        console.log("images is :"+lcimg);
+                    lcContent ='<div class="swiper-slide">'
+                    +'<img class="lazy"  src="'+lcimg+'" width="100%" height="100%" /></div>'
+                    
+                    
+                   
+                   $('.bannerslide').append(lcContent);
+                     $('#loader').hide();
+                      
+
+                })
+
+            
+                       var mySwiper1 = myApp.swiper('.swiper-2', {
+                      pagination:'.swiper-2 .swiper-pagination',
+                      spaceBetween: 50,
+                       preloadImages: false,
+                          lazyLoading: true,
+                        });
+                });   
+               
+                
+                                     //lcdiv.css({"background-image":"url(http://156.67.216.211:8090/images/buah-buahan.png)", "background-size" : "cover"});
+                       // if (src) {
+                          //  var img = new Image();
+                           // img.style.display = "none";
+                           // img.onload = function() {
+                                //$(this).fadeIn(1000);
+                                //lcdiv.css({"background-image":"url(http://156.67.216.211:8090/images/buah-buahan.png)"});
+                                //alert(src)
+                           // };
+                           //lcdiv.append(img);            
+                            //img.src = src;
+                     //   }
+                           // alert("01")
+                       // $('.lazy').lazy({
+                        //     afterLoad: function(element) {
+                         //  $('div.lazy').addClass('dashmainimg')
+                          // $('div.lazy').css("background-size","cover")
+                           // alert("01")
+                          //}
+                         //});
+
+                            //alert("02")
+               // $('img.lazy').lazy()
+            //localStorage.clear(); 
+
+
+         
+
+    },
+    checkimg: function(url) {
+
+        return (url.match(/\.(jpeg|jpg|gif|png)$/) != null);
+    },
+    setListOrder: function(Obj) {
+        lcFuntion = "setListOrder";
+        console.log("Function run : " + lcFuntion);
+        var lcSub = 0;
+        $(".litMainOrd").empty();
+        $.each(Obj, function(i, val) {
+            lcimg = basicapp.GetImgUrl(val.lcImg) //lcurlimg+val.lcImg
+            lcCont = '<div class="litsubMainOrd" id="litsubMainOrd' + val.lcId + '">' + '<div class="litsubMainOrdImg" style="background-image:url(' + lcimg + ')">'
+                // + '<i class="fa  ' + val.lcImg + '" style="font-size: 48px"></i></div>'
+                + '</div>' + '<div class="litsubMainOrdTit">' + '<table><tr><td class="Itmtit"><b>' + val.lcNm + '</b></td></tr>' + '<tr><td class="ItmQty">' + val.lcTit + '</td></tr>' + '<tr><td class="ItmPr"><b>Rp. ' + appOrd.formatCur(val.lcPrice) + '</b></td></tr></table></div>' + '<div class="litsubMainOrdplsmin">' + '<table><tr><td class="ItmPr detPr">' + '<i  class="fa  fa-minus-circle detmin" data-count="lccountlist" data-item="lccountlist' + val.lcId + '" data-itemid="' + val.lcId + '" onclick="appOrd.getMin(this)"></i>' + '&nbsp;<b class="detplus" id="lccountlist' + val.lcId + '" data-item="' + val.lcId + '" data-price="' + val.lcPrice + '">' + val.lcJum + '</b>&nbsp;' + '<i  class="fa  fa-plus-circle detplus" data-count="lccountlist" data-item="lccountlist' + val.lcId + '" data-itemid="' + val.lcId + '" onclick="appOrd.getPlus(this)"></i>&nbsp;' + '<i style="color: red" class="fa  fa-trash detplus" data-name="' + val.lcNm + '" data-img="' + val.lcImg + '" id="' + val.lcId + '" data-count="lccountlist" data-item="litsubMainOrd' + val.lcId + '" onclick="appOrd.getRemove(this)"></i>' + '</td></tr></table></div>' + '</div>'
+            $(".litMainOrd").append(lcCont);
+            lcSub = lcSub + (val.lcPrice * val.lcJum)
+        })
+
+        $("#subtot").text(appOrd.formatCur(lcSub))
+        $("#lcCost").text(appOrd.formatCur(10000))
+        $("#lctot").text(appOrd.formatCur(lcSub + 10000))
+        $("#btncheck").css("background", "green")
+    },
+    GetItem: function(Obj, tcl) {
+        lcFuntion = "GetItem";
+        console.log("Function run : " + lcFuntion);
+        lcAction = "app-getitem";
+        if (tcl == 'main') {
+            lcSoffSet = 0;
+        } else {
+            lcSoffSet = SoffSet;
+            //              console.log("calles:" + lcSoffSet)
+        }
+        lcData = {
+            "lclimit": sLimit,
+            "offset": lcSoffSet,
+            "itemtype": Obj
+        };
+        appOrd.GetReqServ(lcData, lcAction, function(output) {
+            appOrd.getSuccess(output, tcl)
+        });
+    },
+    GetReqServ: function(lcdata, lcadd, handleData) {
+        lcFuntion = "GetReqServ";
+        console.log("Function run : " + lcFuntion);
+        $('#loader').show();
+        $.ajax({
+            type: "POST",
+            // url: lcUrl + lcadd,
+            url: basicapp.GetContentUrl(lcadd),
+            timeout: lctimeout,
+            data: JSON.stringify(lcdata),
+            beforeSend: function(xhr) {
+                xhr.setRequestHeader("Accept", "application/json");
+                xhr.setRequestHeader("Content-Type", "application/json"); // contentType: "application/x-www-form-urlencoded; charset=UTF-8", //sending
+                $('#loader').show();
+            },
+            success: function(response, status, textStatus) {
+                // console.log("Value of testStatus:- " + JSON.stringify(textStatus));
+                handleData(response);
+
+            }, //timeout:3000,
+            error: function(jqXhr, textStatus, errorThrown) {
+                appMain.getError(jqXhr)
+            }
+        });
+    },
+    GetReturnData: function(Obj) {
+
+        return Obj
+    },
+    GetList: function(Obj) {
+        lcFuntion = "GetList";
+        // mainView.hideToolbar();
+        console.log("Function run : " + lcFuntion);
+        lcid = Obj.id;
+        lctipe = lcid;
+        $("#PageListMain").empty(); //TO-DO 
+        if ($("#PageListMain").html() === '') {
+            SoffSet = sLimit;
+            lcheight = $("#PageListMain").height();
+            isPreviousEventComplete = true
+            isDataAvailable = true
+            appOrd.GetItem(lcid, 'main')
+        } else {
+            console.log("not empty")
+            myApp.showTab("#PageListMain");
+        }
+    },
+    getSuccess: function(Obj, tcal) {
+        lcFuntion = "getSuccess";
+        console.log("Function run : " + lcFuntion);
+        var lcEvent = "";
+        var lcMain = "";
+        var lcEventDesc = "";
+
+        $.each(Obj, function(i, val) {
+            lcimg = basicapp.GetImgUrl(val.itemicon) //lcurlimg+val.itemicon
+                //console.log(lcimg)
+
+            console.log("eve use:" + JSON.stringify(val))
+            if (val.itmevuse == 1) {
+                lcEvent = '<strike class="ItmQty itmStrike">Rp. ' + appOrd.formatCur(val.itmprice) + '</strike>'
+                lcEventDesc = ' <p id="bg-text" class="blink">' + val.itmdvdesc + '&nbsp' + val.itmevset + '% Off</p>'
+                lcMain = '<b class="itmPrice">Rp. ' + appOrd.formatCur(val.itmevprice) + '</b>'
+                lcPrice = appOrd.formatCur(val.itmevprice)
+            } else {
+                lcPrice = appOrd.formatCur(val.itmprice)
+                lcEvent = '';
+                lcEventDesc = ''
+                lcMain = '<b class="itmPrice">Rp. ' + appOrd.formatCur(val.itmprice) + '</b>'
+            }
+
+            lcContent = '<div data-price="' + lcPrice + '" data-evenid="' + val.itmevid + '" data-desc="' + val.itmsat + ' /~ ' + val.itmqty + ' ' + val.itmvol + '"' + 'data-head="' + val.deschead + '" data-ico="' + val.itemicon + '" class="mainItm" onClick="appOrd.getDetail(this)" id="' + val.iditm + '">'
+                // + '<div class="imgItm" style="background-image:url('+lcimg+')"><i class="fa  ' + val.itemicon + '"></i></div>' + '<table>' + '<tr><td class="Itmtit"><b>' + val.deschead + '</b></td></tr>' 
+                + '<div class="imgItm" style="background-image:url(' + lcimg + ')">' + lcEventDesc + '</div>' + '<table>' + '<tr><td class="Itmtit"><b>' + val.deschead + '</b></td></tr>' + '<tr><td class="ItmQty">Harga / ' + val.itmsat + ' /~ ' + val.itmqty + ' ' + val.itmvol + ' </td></tr>' + '<tr><td class="ItmPr">' + lcEvent + '&nbsp' + lcMain + '</td></tr></table></div> '
+            $("#PageListMain").append(lcContent);
+        });
+        if (tcal == 'scroll') {
+            SoffSet = SoffSet + sLimit;
+            sLimit = sLimit;
+            isPreviousEventComplete = true;
+            if (Obj == '') //When data is not available
+                isDataAvailable = false;
+            $('#loader').hide();
+        } else {
+            $('#loader').hide();
+            myApp.showTab("#PageListMain");
+            LcBackPage = "#PageHome"
+                //            $('.menu-back').show();
+        }
+        appMain.closesped();
+    },
+    getDetail: function(Obj) {
+        lcFuntion = "getDetail";
+        console.log("Function run : " + lcFuntion);
+        //          $('#loader').show();
+        $("#myDet").empty();
+        lcimg = basicapp.GetImgUrl($(Obj).data("ico")) //lcurlimg+$(Obj).data("ico");
+            // lcimg = "http://93.188.166.178:8080/images/img.jpg"
+            // lcCont = '<div class="imgItm detimt" ><i class="fa ' + $(Obj).data("ico") + '  detitmimg"></i></div>' + '<table>' 
+        lcCont = '<div class="imgItm detimt"  style="background-image:url(' + lcimg + ')"></div>' + '<table>' + '<tr><td class="Itmtit titDet"><b>' + $(Obj).data("head") + '</b></td></tr>' + '<tr><td class="ItmQty titDet">Harga / ' + $(Obj).data("desc") + '</td></tr>' + '<tr><td class="ItmPr titDet"><b>Rp. ' + $(Obj).data("price") + '</b></td></tr></table>' + '<table class="detpick">' + '<tr><td class="ItmPr detPr">' + '<i class="fa  fa-minus-circle detmin" data-count="lccount"  onclick="appOrd.getMin(this)"></i>' + '&nbsp;<b class="detplus" data-evenid="' + $(Obj).data("evenid") + '" data-desc="' + $(Obj).data("desc") + '" id="lccount" data-ico="' + $(Obj).data("ico") + '" data-nama="' + $(Obj).data("head") + '" data-item="' + Obj.id + '" data-price="' + $(Obj).data("price") + '">1</b>&nbsp;' + '<i class="fa  fa-plus-circle detplus" data-count="lccount" onclick="appOrd.getPlus(this)"></i>' + '</td></tr></table>';
+        $("#myDet").append(lcCont)
+        $("#detailItm").fadeIn("slow", function() {
+            //              $('#loader').fadeOut("show");
+        });
+
+        appMain.closesped();
+    },
+    GetProc: function(Obj) {
+        lcFuntion = "GetProc";
+        console.log("Function run : " + lcFuntion);
+        lcItem = $('#lccount').data('item');
+        lcNama = $('#lccount').data('nama');
+        lcicon = $('#lccount').data('ico');
+        lcEveid = $('#lccount').data('evenid');
+        lcPrice = $('#lccount').data('price').replace(/\./g, '');
+        lcQty = parseFloat($('#lccount').text())
+        lcDesc = $('#lccount').data('desc');
+
+        $("#detailItm").fadeOut("slow");
+        appMain.GetNotif("Success", "Barang dimasukan kedalam keranjang ", "01");
+        var exisorder = JSON.parse(localStorage.getItem("MyOrder"));
+        if (exisorder) {
+            dataexis = $.map(exisorder, function(val, key) {
+                if (val.lcId === lcItem)
+                    return val;
+            })
+        } else {
+            dataexis = ''
+        }
+        if (dataexis != '') {
+            for (var i = 0; i < exisorder.length; i++) {
+                if (exisorder[i].lcId === lcItem) {
+                    exisorder[i].lcJum += lcQty;
+                    localStorage.setItem("MyOrder", JSON.stringify(exisorder))
+                    appOrd.setListOrder(JSON.parse(localStorage.getItem("MyOrder")));
+                    return;
+                }
+            }
+        } else {
+            if (exisorder == null)
+                exisorder = [];
+            var entry = {
+                "lcNm": lcNama,
+                "lcId": lcItem,
+                "lcEvId": lcEveid,
+                "lcPrice": parseFloat(lcPrice),
+                "lcImg": lcicon,
+                "lcJum": lcQty,
+                "lcTit": lcDesc
+            };
+            localStorage.setItem("entry", JSON.stringify(entry));
+            exisorder.push(entry);
+            localStorage.setItem("MyOrder", JSON.stringify(exisorder));
+
+            $(".mylistcart").css('color', '#f68029');
+            $(".mylistcart").addClass('blink');
+            appOrd.setListOrder(JSON.parse(localStorage.getItem("MyOrder")));
+
+
+        }
+    },
+    getRiview: function(Obj) {
+        lcFuntion = "getRiview";
+        console.log("Function run : " + lcFuntion);
+        myApp.showTab('#PageListOrder');
+        LcBackPage = "#PageHome"
+        appMain.closesped();
+        $("#detailItm").fadeOut("slow");
+        $('.speed-dial').show();
+
+
+    },
+    GetCheck: function() {
+        lcFuntion = "GetCheck";
+        console.log("Function run : " + lcFuntion);
+        lcStore = localStorage.getItem("MyOrder");
+
+        appMain.closesped();
+        $('.speed-dial').hide();
+        // console.log(JSON.stringify(lcStore))
+        // console.log(lcStore)
+
+        if (lcStore == null) {
+            return false;
+        } else {
+            appMap.initialize();
+            myApp.showTab("#PageAlmt");
+            LcBackPage = "#PageListOrder"
+            $('.menu-back').data('page', '#PageListOrder').show();
+        }
+
+        // if(lcStore.length == 0){
+        //     alert("no")
+        // }
+
+
+        // if(JSON.stringify(lcStore) == null){
+        // //     appMap.initialize(); // should open this calll
+        //     alert("no have aut")
+        // }else{
+        //     myApp.showTab("#PageAlmt");
+        // }
+
+        // if (lcStore != null || lcStore == "")
+        //              initial();
+
+    },
+    GetShop: function() {
+        lcFuntion = "GetShop";
+        console.log("Function run : " + lcFuntion);
+
+        if ($("#PageListMain").html() == '') {
+            console.log("empty")
+            appOrd.GetItem(1, 'main')
+        }
+
+        myApp.showTab("#PageListMain");
+        //        $('.menu-back').show();
+        appMain.closesped();
+        // $('.speed-dial').show();
+    },
+    getValid: function(Obj) {
+        lcFuntion = "getValid";
+        console.log("Function run : " + lcFuntion);
+        lcStore = localStorage.getItem("MyOrder")
+        $(Obj).validate({
+            callbacks: {},
+            lcdataitem: lcStore,
+            validators: {
+                reg: {
+                    lcdetadd: /^[a-zA-Z0-9_ ]+$/,
+                },
+                text: {
+                    lcdetadd: "Please enter a correct address"
+                }
+            }
+        });
+
+    },
+    getProses: function(LcRespon, lcAct) {
+        lcFuntion = "getProses";
+        console.log("Function run : " + lcFuntion);
+        
+        lcCode = parseFloat(LcRespon.rsltcode)
+        if(lcCode == 19){
+        appMain.GetNotif(lcnotif, LcRespon.rsltmsg, rsltCcode)
+        }
+        appOrd.GetListOrd();
+        appOrd.reset();
+    },
+    setOrder: function(Obj) {
+        lcFuntion = "setOrder";
+        console.log("Function run : " + lcFuntion);
+        //lcObject = JSON.parse(localStorage.getItem("lisOforder"));
+
+        // console.log("data receive : " + Obj.rsltdata.item.length)
+
+        console.log(JSON.stringify(Obj));
+
+        if (Obj.rsltdata.item.length > 0) {
+
+            lacval = Obj.rsltdata.item //LcRespon.rsltdata
+            $("#tabWait").empty();
+            $.each(lacval, function(i, lcdata) {
+                var mydate = appOrd.convertdate(lcdata.lctglord);
+                var lcdely = appOrd.convertdate(lcdata.lctglexp);
+                lcCont = '<div class="ordstat" id="setOrder' + lcdata.lcid + '" data-item="' + lcdata.lcid + '" data-stat="' + lcdata.lcstatcd + '"  onclick="appOrd.getdetitem(this)" data-inv="' + lcdata.lcinvoorder + '">' + '<div class="ordststdt"><i>Order : ' + mydate + '</i></div>' + '<div style="width: 100%; height: 80%; border: solid 1px #F4F4F4">' + '<table class="mainTaborder">' + '<tr><td colspan="0" align="left"><i>Order Number</i></td><td>:</td><td class="ItmPr">' + '<i><span id="ordnum">' + lcdata.lcinvoorder + '</span></i></td></tr>' + '<tr><td colspan="0" align="left"><i>Waktu Pengiriman</i></td><td>:</td><td class="ItmPr">' + '<i><span id="orddel" style="color:orange">' + lcdely + '</span></i></td></tr>' + '<tr><td colspan="0" align="left"><i>Status</i></td><td>:</td><td class="ItmPr">' + '<i><span id="ordstat" class="blink" style="color:green">' + lcdata.lcstat + '</span></i></td></tr>' + '<tr><td colspan="0" align="left"><i><b>Cost Total</b></i></td><td>:</td><td class="ItmPr">' + '<i>Rp.<span id="ordtot">' + appOrd.formatCur(lcdata.lcordtotal) + '</span></i></td></tr>' + '</table></div></div>'
+                    // console.log(lcCont);
+                $("#tabWait").prepend(lcCont);
+            })
+        }
+
+        if (lcInit == 'main') {
+            appMain.GetPage('#PageHome');
+        } else {
+            appMain.GetPage('#PageOrd');
+            $(".btnTab").removeClass("btnTabact")
+            $(".tabWait").addClass("btnTabact")
+            myApp.showTab("#tabWait");
+            LcBackPage = "#PageHome"
+                //              myApp.showTab("#PageOrd");  
+        }
+        //          appOrd.reset(); 
+
+    },
+    GetListOrd: function() {
+        lcFuntion = "GetListOrd";
+        console.log("Function run : " + lcFuntion);
+        lcInit = '';
+        lcAction = "app-getdata";
+        lcData = JSON.parse(localStorage.getItem("SetUserData"));
+        lcDetData = {
+            "lcidmember": lcData.id,
+            "lcstat": "1",
+            "lctoken": lcData.apptkn
+        };
+        appOrd.GetReqServ(lcDetData, lcAction, function(output) {
+            appOrd.setOrder(output);
+            $('#loader').hide();
+        });
+        appMain.GetPage('#PageOrd');
+        $('.menu-back').show();
+    },
+    getdetitem: function(Obj) {
+        lcFuntion = "getdetitem";
+        console.log("Function run : " + lcFuntion);
+        lcAction = 'app-getdetail';
+        lcData = JSON.parse(localStorage.getItem("SetUserData"));
+        lcDetData = {
+            "lcitemid": $(Obj).data('item'),
+            "lcidmember": lcData.id,
+            "lcstat": "0",
+            "lctoken": lcData.apptkn
+        };
+
+        //data-inv="' + lcdata.lcinvoorder + '"
+
+        appOrd.GetReqServ(lcDetData, lcAction, function(output) {
+            if ($(Obj).data("stat") > 1) {
+
+                if ($(Obj).data("stat") == 2) { //Dalam Pengiriman 
+                    $(".orddetis").css({
+                        "background": "green"
+                    })
+                    $("#btnccanbu").css({
+                        "background": "gray"
+                    })
+                    $("#btnccanbu").attr("onclick", "")
+                } else if ($(Obj).data("stat") == 3) { //Diterima
+                    $(".orddetis").css({
+                        "background": "green"
+                    })
+                    $("#btnccanbu").css({
+                        "background": "red"
+                    })
+
+                    $("#btnccanbu").data('inv',$(Obj).data("inv")); 
+                    $("#btnccanbu").text("Confirmasi penerimaan")
+                    $("#btnccanbu").attr("onclick", "appOrd.ShowQrCode(this)")
+                } else if ($(Obj).data("stat") == 4) { //Complete
+                    $(".orddetis").css({
+                        "background": "red"
+                    })
+                    $("#btnccanbu").css({
+                        "background": "green"
+                    })
+                    $("#btnccanbu").text("Order kembali")
+                    $("#btnccanbu").attr("onclick", "appOrd.GetRebuy(this)")
+                }
+
+            } else {
+
+                // if($(Obj).data("stat") == 2){}
+                $(".orddetis").css({
+                    "background": "red"
+                })
+                $("#btnccanbu").css({
+                    "background": "green"
+                })
+                $("#btnccanbu").text("Cancel order");
+                $("#btnccanbu").attr("onclick", " appOrd.GetCancelbuy(this)")
+            }
+            $("#btnccanbu").data("id", $(Obj).data("item"));
+            $("#btnccanbu").data("stat", $(Obj).data("stat"));
+
+            // if($(Obj).data("stat") > 1){
+            // $("#btnccanbu").removeClass('btnpro').addClass('btndef').attr("onclick","");
+
+            console.log("dta identify : " + $(Obj).data("stat"));
+            // }
+            appOrd.setdetitem(output);
+        });
+    },
+    setdetitem: function(Obj) {
+        lcFuntion = "setdetitem";
+        console.log("Function run : " + lcFuntion);
+        lacval = Obj.rsltdata.lcdetail; //LcRespon.rsltdata
+        appMain.closesped();
+        // var lcstatord = 0;
+        console.log("detail data is :" + JSON.stringify(lacval));
+        var lcSub = 0;
+        $(".litMainOrddetail").empty();
+        $.each(lacval, function(j, lcdetail) {
+            // console.log(j+"---"+lcdetail+"-----"+JSON.stringify(lcdetail));
+            // lcimg = "http://93.188.166.178:8080/images/"+lcdetail.lcitemicon
+            lcimg = basicapp.GetImgUrl(lcdetail.lcitemicon) //lcurlimg+lcdetail.lcitemicon
+
+            lcKet = "Harga  / " + lcdetail.lcitmsat + " /~ " + lcdetail.lcitmqty + " " + lcdetail.lcitmvol
+            lcCont = '<div class="litsubMainOrd" id="litsubMainOrd' + lcdetail.lcitid + '">' + '<div class="litsubMainOrdImg"  style="background-image:url(' + lcimg + ');">'
+                // + '<i class="fa  ' + lcdetail.lcitemicon + '" style="font-size: 48px"></i></div>' 
+                + '</div>' + '<div class="litsubMainOrdTit" style="width:40%">' + '<table><tr><td class="Itmtit"><b>' + lcdetail.lcdeschead + '</b></td></tr>' + '<tr><td class="ItmQty">' + lcKet + '</td></tr>' + '<tr><td class="ItmPr"><b>Rp. ' + appOrd.formatCur(lcdetail.lcitpr) + '</b></td></tr></table></div>' + '<div class="litsubMainOrdplsmin" style="width:30%">' + '<table><tr><td class="ItmPr detPr">' + '&nbsp;<b class="detplus" id="lccountlist' + lcdetail.lcitid + '" data-item="' + lcdetail.lcitid + '" data-price="' + lcdetail.lcitid + '">' + lcdetail.lcitjum + '</b>&nbsp;' + '</td></tr></table></div>' + '</div>'
+
+
+            $(".litMainOrddetail").append(lcCont);
+            lcSub = lcSub + (lcdetail.lcitpr * lcdetail.lcitjum);
+            lcstatord = lcdetail.lcordstat;
+        })
+
+        $("#subtotdet").text(appOrd.formatCur(lcSub));
+        $("#lcCostdet").text(appOrd.formatCur(10000)) //TO-DO
+        $("#lctotdet").text(appOrd.formatCur(lcSub + 10000))
+
+        myApp.showTab("#PageListDetail");
+        LcBackPage = "#PageOrd"
+        $('#loader').hide();
+
+
+    },
+    GetBack: function(Obj) {
+        lcFuntion = "GetBack";
+        console.log("Function run : " + lcFuntion);
+        myApp.showTab("#PageOrd");
+        LcBackPage = "#PageHome"
+        appMain.closesped();
+    },
+    GetCancelbuy: function(Obj) {
+        lcFuntion = "GetCancelbuy";
+        console.log("Function run : " + lcFuntion);
+        appMain.closesped();
+        $(".maincon").empty();
+        // data-name="'+val.lcNm+'" data-img="'+val.lcImg+'" id="'+val.lcId+'" data-count="lccountlist" data-item="lccountlist'+val.lcId+'"
+        lcCont = '<div class="notify errorbox">' + '<h1>~ Confirm ~</h1>' + '<span class="alerticon blink"><img src="images/error.png" alt="checkmark" /></span>' + '<p>Batalkan pesanan ini... ??</p>' + '<table class="detBut"><td>' + '<button class="btncan" data-item="' + $(Obj).data("id") + '" data-stat="' + $(Obj).data("stat") + '" data-div="setOrder' + $(Obj).data("id") + '" onclick="appOrd.setRemoveorder(this)">Ya</button>' + '<button class="btnpro" onclick="appOrd.cancelRemoveItem(this)">Tidak</button>' + '</td></table></div>'
+        $("#ConfirmRem").fadeIn("slow", function() {
+            $(".maincon").append(lcCont)
+        });
+    },
+    setRemoveorder: function(Obj) {
+        lcFuntion = "setRemoveorder";
+        console.log("Function run : " + lcFuntion);
+        //          lcitem = $(Obj).data('item')
+
+        myApp.showTab("#PageOrd");
+        LcBackPage = "#PageHome"
+        appOrd.cancelRemoveItem()
+        lcAction = "app-ordercancel";
+        lcData = JSON.parse(localStorage.getItem("SetUserData"));
+        lcDetData = {
+            "lcitemid": $(Obj).data('item'),
+            "lcidmember": lcData.id,
+            "lcstat": "0",
+            "lctoken": lcData.apptkn
+        };
+        appOrd.GetReqServ(lcDetData, lcAction, function(output) {
+            lcDiv = $(Obj).data('div')
+            mcDiv = $("#" + lcDiv);
+            mcDiv.remove()
+            $('#loader').hide();
+        });
+    },
+    formatCur: function(Obj) {
+        lcFuntion = "formatCur";
+        var bilangan = Obj;
+        var reverse = bilangan.toString().split('').reverse().join(''),
+            ribuan = reverse.match(/\d{1,3}/g);
+        ribuan = ribuan.join('.').split('').reverse().join('');
+        return ribuan;
+    },
+    GetCancel: function() {
+        lcFuntion = "GetCancel";
+        console.log("Function run : " + lcFuntion);
+        $("#detailItm").fadeOut("slow");
+    },
+    getPlus: function(Obj) {
+        lcFuntion = "getPlus";
+        console.log("Function run : " + lcFuntion);
+
+
+        if ($(Obj).data('count') == 'lccountlist') {
+            lcdiv = $(Obj).data('item')
+            lcitem = $(Obj).data('itemid')
+            mcDiv = $("#" + lcdiv);
+            lcQty = mcDiv.text();
+            //              if(parseFloat(lcQty) > 1)
+            mcDiv.text(parseFloat(lcQty) + 1)
+                //              console.log(mcDiv.text())
+            lcObject = JSON.parse(localStorage.getItem("MyOrder"));
+            $.each(lcObject, function(i, val) {
+                if (val.lcId === lcitem)
+                    val.lcJum = parseFloat(mcDiv.text())
+                return val;
+            })
+
+            localStorage.setItem("MyOrder", JSON.stringify(lcObject))
+            appOrd.getTotal(lcObject);
+        }
+
+        lcQty = $('#lccount').text();
+        $('#lccount').text(parseFloat(lcQty) + 1)
+    },
+    getMin: function(Obj) {
+        lcFuntion = "getMin";
+        console.log("Function run : " + lcFuntion);
+
+        //          console.log("test")     
+        if ($(Obj).data('count') == 'lccountlist') {
+            lcdiv = $(Obj).data('item')
+            lcitem = $(Obj).data('itemid')
+            mcDiv = $("#" + lcdiv);
+            lcQty = mcDiv.text();
+            if (parseFloat(lcQty) > 1)
+                mcDiv.text(parseFloat(lcQty) - 1)
+            console.log(mcDiv.text())
+            lcObject = JSON.parse(localStorage.getItem("MyOrder"));
+            $.each(lcObject, function(i, val) {
+                if (val.lcId === lcitem)
+                    val.lcJum = parseFloat(mcDiv.text())
+                return val;
+            })
+
+            localStorage.setItem("MyOrder", JSON.stringify(lcObject))
+            appOrd.getTotal(lcObject);
+        }
+
+        lcQty = $('#lccount').text();
+        if (parseFloat(lcQty) > 1)
+            $('#lccount').text(parseFloat(lcQty) - 1)
+
+    },
+    getRemove: function(Obj) {
+        lcFuntion = "getRemove";
+        console.log("Function run : " + lcFuntion);
+        lcId = Obj.id
+        lcName = $(Obj).data('name')
+        lcMain = $(Obj).data('item')
+        console.log(lcId)
+        $(".maincon").empty();
+        // data-name="'+val.lcNm+'" data-img="'+val.lcImg+'" id="'+val.lcId+'" data-count="lccountlist" data-item="lccountlist'+val.lcId+'"
+        lcCont = '<div class="notify errorbox">' + '<h1>~' + lcName + '~</h1>' + '<span class="alerticon blink"><img src="images/error.png" alt="checkmark" /></span>' + '<p>Hapus item ini... ??</p>' + '<table class="detBut"><td>' + '<button class="btncan" data-item="' + lcId + '" data-div="' + lcMain + '" onclick="appOrd.GetRemoveItem(this)">Ya</button>' + '<button class="btnpro" onclick="appOrd.cancelRemoveItem(this)">Tidak</button>' + '</td></table></div>'
+        $("#ConfirmRem").fadeIn("slow", function() {
+            $(".maincon").append(lcCont)
+        });
+    },
+    getTotal: function(Obj) {
+        lcFuntion = "getTotal";
+        console.log("Function run : " + lcFuntion);
+
+        var lcSub = 0,
+            lcCost = 0;
+        $.each(Obj, function(i, val) {
+            lcSub = lcSub + (val.lcPrice * val.lcJum)
+        })
+
+        if (lcSub) {
+            lcCost = 10000
+            $("#btncheck").css("background", "green")
+        } else {
+            lcCost = 0;
+            $("#btncheck").css("background", "gray")
+        }
+        //          console.log(lcSub)
+        //          console.log(lcCost) 
+        $("#subtot").text(appOrd.formatCur(lcSub))
+        $("#lcCost").text(appOrd.formatCur(lcCost)) //TO-DO
+        $("#lctot").text(appOrd.formatCur(lcSub + lcCost))
+            //          $("#btncheck").css("background","green")            
+    },
+    GetRemoveItem: function(Obj) {
+        lcFuntion = "GetRemoveItem";
+        console.log("Function run : " + lcFuntion);
+
+        lcitem = $(Obj).data('item')
+        lcDiv = $(Obj).data('div')
+        mcDiv = $("#" + lcDiv);
+        lcObject = JSON.parse(localStorage.getItem("MyOrder"));
+        lcObject = $.grep(lcObject, function(val) {
+            return val.lcId != lcitem;
+        })
+        console.log(lcObject)
+        localStorage.setItem("MyOrder", JSON.stringify(lcObject))
+        mcDiv.remove()
+        if (lcObject.length === 0) {
+            localStorage.removeItem("MyOrder");
+            appOrd.GetItem(1, 'main')
+            $(".mylistcart").removeClass('blink');
+            $(".mylistcart").css('color', '#fff');
+        }
+        appOrd.getTotal(lcObject)
+        appOrd.cancelRemoveItem();
+
+    },
+    cancelRemoveItem: function() {
+        lcFuntion = "cancelRemoveItem";
+        console.log("Function run : " + lcFuntion);
+
+        $("#ConfirmRem").fadeOut("slow", function() {
+            $(".maincon").empty();
+        });
+
+    },
+    convertdate: function(Obj) {
+        lcFuntion = "convertdate";
+        var hari = ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jum&#39;at', 'Sabtu']
+        var bulan = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember']
+        var dt = new Date(Obj);
+        var _hari = dt.getDay();
+        var _tgl = dt.getDate();
+        var _bulan = dt.getMonth();
+        var _tahun = dt.getFullYear();
+        var mydate = hari[_hari] + "," + _tgl + " " + bulan[_bulan] + " " + _tahun;
+        return mydate;
+
+    },
+    reset: function() {
+        lcFuntion = "reset";
+        console.log("Function run : reset");
+        localStorage.removeItem("MyOrder");
+        $(".litMainOrd").empty();
+        //         $(".mylistcart").removeClass('blink');
+        $(".mylistcart").removeClass('blink');
+        $(".mylistcart").css('color', '#fff');
+        // $(".mylistcart").css('color', '#9cc13b');
+        $("#subtot").text(0);
+        $("#lcCost").text(0);
+        $("#lctot").text(0);
+        $("#btncheck").css("background", "gray")
+        $('#loader').hide();
+    },
+    ChangeTab: function(Obj) {
+        lcFuntion = "ChangeTab";
+        console.log("Function run : " + lcFuntion);
+        appMain.closesped();
+        $(".btnTab").removeClass("btnTabact")
+        $(Obj).addClass("btnTabact")
+        grStat = $(Obj).data('group');
+        Div = $(Obj).data('tab')
+        myApp.showTab("#" + Div);
+        lcAction = "app-getdata";
+        lcData = JSON.parse(localStorage.getItem("SetUserData"));
+        lcDetData = {
+            "lcidmember": lcData.id,
+            "lcstat": grStat,
+            "lctoken": lcData.apptkn
+        };
+        appOrd.GetReqServ(lcDetData, lcAction, function(output) {
+            appOrd.SetOrderDet(output, Div);
+            $('#loader').hide();
+        });
+    },
+    SetOrderDet: function(Obj, dttab) {
+        lcFuntion = "SetOrderDet";
+        console.log("Function run : " + lcFuntion);
+        mydiv = $("#" + dttab)
+        mydiv.empty();
+        if (Obj.rsltdata != null) {
+            lacval = Obj.rsltdata.item
+            $.each(lacval, function(i, lcdata) {
+                var mydate = appOrd.convertdate(lcdata.lctglord);
+                var lcdely = appOrd.convertdate(lcdata.lctglexp);
+                var mydate = appOrd.convertdate(lcdata.lctglord);
+                var lcdely = appOrd.convertdate(lcdata.lctglexp);
+
+                    //alert(JSON.stringify(output))
+
+                   // $("#btnccanbu").data("inv",)
+
+                lcCont = '<div class="ordstat" id="setOrder' + lcdata.lcid + '" data-item="' + lcdata.lcid + '" data-stat="' + lcdata.lcstatcd + '"  onclick="appOrd.getdetitem(this)" data-inv="' + lcdata.lcinvoorder + '">' + '<div class="ordststdt"><i>Order : ' + mydate + '</i></div>' + '<div style="width: 100%; height: 80%; border: solid 1px #F4F4F4">' + '<table class="mainTaborder">' + '<tr><td colspan="0" align="left"><i>Order Number</i></td><td>:</td><td class="ItmPr">' + '<i><span id="ordnum">' + lcdata.lcinvoorder + '</span></i></td></tr>' + '<tr><td colspan="0" align="left"><i>Waktu Pengiriman</i></td><td>:</td><td class="ItmPr">' + '<i><span id="orddel" style="color:orange">' + lcdely + '</span></i></td></tr>' + '<tr><td colspan="0" align="left"><i>Status</i></td><td>:</td><td class="ItmPr">' + '<i><span id="ordstat" class="blink" style="color:green">' + lcdata.lcstat + '</span></i></td></tr>' + '<tr><td colspan="0" align="left"><i><b>Cost Total</b></i></td><td>:</td><td class="ItmPr">' + '<i>Rp.<span id="ordtot">' + appOrd.formatCur(lcdata.lcordtotal) + '</span></i></td></tr>' + '</table></div></div>'
+                    // $("#tabComplete").prepend(lcCont);
+                mydiv.prepend(lcCont);
+            })
+        }
+        //          myApp.showTab("#PageOrd");
+
+    },
+    senderror: function(Obj) {
+     lcFuntion = "senderror";
+        console.log("Function run : " + lcFuntion);
+        lcAction = "app-cleinterror";
+        lcData = JSON.parse(localStorage.getItem("SetUserData"));
+        lcDetData = {
+            "lcdata": Obj
+        };
+        appOrd.GetReqServ(lcDetData, lcAction, function(output) {
+            $('#loader').hide();
+        });
+    },
+    GetScroll: function() {
+     lcFuntion = "GetScroll";
+        console.log("Function run : " + lcFuntion);
+        lcsroll = $("#PageListMain").scrollTop() + $("#PageListMain").height();
+        if (lcsroll >= lcheight + 100) {
+            lcheight = lcsroll + lcheight
+            if (isPreviousEventComplete && isDataAvailable) {
+                isPreviousEventComplete = false;
+                appOrd.GetItem(lctipe, 'scroll')
+            }
+        }
+    },
+    GetHome: function(Obj) {
+      lcFuntion = "GetHome";
+        console.log("Function run : " + lcFuntion);
+        myApp.showTab($(Obj).data('page'));
+        // $('.menu-back').hide();
+        $('.menu-back').data('page', '#PageHome').hide();
+
+    },
+    GeSearch: function() {
+      lcFuntion = "GeSearch";
+        console.log("Function run : " + lcFuntion);
+
+   }, 
+   ScanQrCode : function(Obj){
+     lcFuntion = "ScanQrCode";
+        console.log("Function run : " + lcFuntion);
+
+
+   cordova.plugins.barcodeScanner.scan(
+      function (result) {
+            
+            if(result.text){
+
+          alert("We got a barcode\n" +
+                "Result: " + result.text + "\n" +
+                "Format: " + result.format + "\n" +
+                "Cancelled: " + result.cancelled);
+                }
+      },
+      function (error) {
+          alert("Scanning failed: " + error);
+      },
+      {
+          preferFrontCamera : false, // iOS and Android
+          showFlipCameraButton : false, // iOS and Android
+          showTorchButton : true, // iOS and Android
+          torchOn: true, // Android, launch with the torch switched on (if available)
+          prompt : "Place a barcode inside the scan area", // Android
+          resultDisplayDuration: 500, // Android, display scanned text for X ms. 0 suppresses it entirely, default 1500
+          formats : "QR_CODE,PDF_417", // default: all but PDF_417 and RSS_EXPANDED
+          orientation : "portrait", // Android only (portrait|landscape), default unset so it rotates with the device
+          disableAnimations : true, // iOS
+          disableSuccessBeep: false // iOS
+      }
+   );
+
+         // localStorage.clear();
+    },ShowQrCode : function(Obj){
+     lcFuntion = "ShowQrCode";
+        console.log("Function run : " + lcFuntion);
+       // localStorage.clear();
+         var qrcode = new QRCode("myqrcode");
+              qrcode.makeCode($(Obj).data("inv"));
+             $("#qrcode").fadeIn("slow", function() {
+                     LcBackPage = 'Modal';
+             });
+    }
+}
+
+
+//-----------------------------------------------begin load googlemap js here------------------------------//
+var appMap = {
+        initialize: function() {
+            lcFuntion = "initialize-map";
+            console.log("Function run : " + lcFuntion);
+            if (navigator.geolocation) {
+                var timeoutVal = 15000;
+                navigator.geolocation.getCurrentPosition(appMap.FoundYou, appMap.DisplayError, {
+                    enableHighAccuracy: false,
+                    timeout: timeoutVal,
+                    maximumAge: Infinity
+                });
+            } else {
+                //                  alert("Geolocation is not supported by this browser");
+                appMain.GetNotif("Fail", "Geolocation is not supported by this browser", "00")
+            }
+        },
+        FoundYou: function(position) {
+            lcFuntion = "FoundYou";
+            console.log("Function run : " + lcFuntion);
+            $("#map_canvas").prepend('<span></span>')
+            var latlng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+            geocoder.geocode({
+                'latLng': latlng
+            }, function(results, status) {
+                if (status == google.maps.GeocoderStatus.OK) {
+                    if (results[0]) {
+                        var address = results[0].address_components[1].long_name + ' ' + results[0].address_components[0].long_name + ', ' + results[0].address_components[3].long_name
+                        $('.lat').val(position.coords.latitude) //minus
+                        $('.long').val(position.coords.longitude) //plus
+                        $('.almt').val(address)
+                        $('div.almt').text(address)
+                        appMap.GotoMap(position.coords.longitude, position.coords.latitude, address)
+                    }
+                } else {
+                    appMain.GetNotif("Fail", "No Connection / Connection Error", "00")
+                }
+            });
+        },
+        LocButton: function(map) {
+            lcFuntion = "LocButton";
+            console.log("Function run : " + lcFuntion);
+            var controlDiv = document.createElement('div');
+            var firstChild = document.createElement('button');
+            firstChild.style.backgroundColor = '#fff';
+            firstChild.style.border = 'none';
+            firstChild.style.outline = 'none';
+            firstChild.style.width = '28px';
+            firstChild.style.height = '28px';
+            firstChild.style.borderRadius = '2px';
+            firstChild.style.boxShadow = '0 1px 4px rgba(0,0,0,0.3)';
+            firstChild.style.cursor = 'pointer';
+            firstChild.style.marginRight = '10px';
+            firstChild.style.padding = '0px';
+            firstChild.title = 'Your Location';
+            controlDiv.appendChild(firstChild);
+            var secondChild = document.createElement('div');
+            secondChild.style.margin = '5px';
+            secondChild.style.width = '18px';
+            secondChild.style.height = '18px';
+            secondChild.style.backgroundImage = 'url(https://maps.gstatic.com/tactile/mylocation/mylocation-sprite-1x.png)';
+            secondChild.style.backgroundSize = '180px 18px';
+            secondChild.style.backgroundPosition = '0px 0px';
+            secondChild.style.backgroundRepeat = 'no-repeat';
+            secondChild.id = 'you_location_img';
+            firstChild.appendChild(secondChild);
+            clearInterval(animationInterval);
+            firstChild.addEventListener('click', function() {
+                var imgX = '0';
+                animationInterval = setInterval(function() {
+                    if (imgX == '-18')
+                        imgX = '0';
+                    else
+                        imgX = '-18';
+                    $('#you_location_img').css('background-position', imgX + 'px 0px');
+                }, 500);
+                appMap.initialize();
+            });
+            controlDiv.index = 1;
+            map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(controlDiv);
+        },
+        GotoMap: function(lat, long, name) {
+            lcFuntion = "GotoMap";
+            console.log("Function run : " + lcFuntion);
+
+            $("#map_canvas").empty();
+            var lclat = lat,
+                lclong = long;
+            var mapOptions = {
+                zoom: 17,
+                center: new google.maps.LatLng(lclong, lclat),
+                mapTypeId: google.maps.MapTypeId.ROADMAP,
+                streetViewControl: false,
+                //  navigationControlOptions: {style: google.maps.NavigationControlStyle.SMALL},
+                mapTypeControl: false,
+                zoomControl: false
+            };
+            var map = new google.maps.Map(document.getElementById('map_canvas'), mapOptions);
+            $('<div/>').addClass('centerMarker').appendTo(map.getDiv())
+            appMap.LocButton(map);
+
+            google.maps.event.addListener(map, 'center_changed', function() {
+                var lat = map.getCenter().lat()
+                var lng = map.getCenter().lng()
+                $('.lat').val(lat)
+                $('.long').val(lng)
+                var latlng = new google.maps.LatLng(lat, lng);
+
+                geocoder.geocode({
+                    'latLng': latlng
+                }, function(results, status) {
+                    if (status == google.maps.GeocoderStatus.OK) {
+                        if (results[0]) {
+                            var address = results[0].address_components[1].long_name + ' ' + results[0].address_components[0].long_name + ', ' + results[0].address_components[3].long_name
+                                //$('.lat').val(map.getCenter().lat())
+                                //$('.long').val(address)
+                                //$('.almt').val(map.getCenter().lng())
+                            $('.almt').val(address)
+                            $('div.almt').text(address)
+                        }
+                    } else {
+                        alert("No Connection / Connection Error");
+                    }
+                });
+            });
+        },
+        DisplayError: function(error) {
+            lcFuntion = "DisplayError";
+            console.log("Function run : " + lcFuntion);
+            var errors = {
+                1: 'Permission denied',
+                2: 'Position unavailable',
+                3: 'Request timeout'
+            };
+            appMain.GetNotif("Fail", "Google map " + errors[error.code] + ",Check your onnection", "00")
+        },
+        Nofound: function(msg) {
+            lcFuntion = "Nofound";
+            console.log("Function run : " + lcFuntion);
+            appMain.GetNotif("Fail", "Could not find your location, Check Our Connection", "00")
+        }
+    }
+    /*]]>*/

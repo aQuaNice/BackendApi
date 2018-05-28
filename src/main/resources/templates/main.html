@@ -1,0 +1,330 @@
+<div class="views" id="deviceready">
+	<div class="view view-main">
+		<div class="navbar">
+			<div class="navbar-inner">
+				<div class="left sliding">
+					<div class="logo_title" style="min-width: 200px">Mang Sayur</div>
+				</div>
+				<div class="right">
+					<a href="#" data-panel="left" class="link icon-only open-panel">
+						<i style="font-size: 28px; color: #fff;"
+						class="fa fa-shopping-cart mylistcart"
+						onclick="appOrd.getRiview(this)"></i>
+					</a>
+				</div>
+			</div>
+		</div>
+		<div class="conload" id="detailItm">
+			<div class="MainDet">
+				<div id="myDet"></div>
+				<table class="detBut">
+					<td>
+						<button class="btncan" onclick="appOrd.GetCancel(this)">Batal</button>
+						<button class="btnpro" onclick="appOrd.GetProc(this)">
+							<i class="fa fa-shopping-cart detcart"></i>Beli
+						</button>
+					</td>
+				</table>
+			</div>
+		</div>
+		<div class="conload" id="ConfirmRem">
+			<div class="maincon"></div>
+		</div>
+		<div class="conload" id="loader">
+			<div class="preloader"></div>
+		</div>
+		<div class="conload" id="message">
+			<div class="mainnotif"></div>
+		</div>
+
+		<div class="conload" id="qrcode" style="background: white;">
+		<div id="myqrcode" style=" width:160px; height:160px; margin-left: 15%; margin-top:50%; background: red; margin-bottom: 35%"></div>
+		<div style=" width:100%; height:160px; text-align: center; color: gray" >Konfirmasi penerimaan barang dengan menunjukan QR Code kepada petugas kami.</div>
+		</div>
+
+		<div class="pages no-navbar toolbar-through">
+			<div data-page="index" class="page homepage">
+
+				<div class="speed-dial">
+					<a href="#" class="floating-button "><i class="fa fa-plus"></i><i
+						class="fa fa-close"></i></a>
+					<div class="speed-dial-buttons">
+						<a href="#" onClick="appMain.closesped();appMain.GetProfile()"><i
+							class="fa fa-user"></i></a>
+						<!--                         <a href="#"  onClick="appMain.closesped();"><i class="fa fa-search"></i></a> -->
+						<a href="#" onClick="appMain.closesped(); appOrd.GetListOrd()"><i
+							class="fa fa-cutlery"></i></a>
+
+						<!-- <a href="#" onClick="appMain.closesped(); appOrd.ScanQrCode(this)"><i
+							class="fa fa-list"></i></a>	 -->
+					</div>
+				</div>
+				<div class="page-content page-contentMain">
+					<div class="tabs-animated-wrap">
+						<div class="tabs">
+							<!--  -->
+							<div class="swiper-container swiper-init tab active"
+								data-effect="coverflow" data-pagination=".swiper-pagination"
+								id="LandingPage">
+								<div class="swiper-wrapper" style="margin: 0; padding: 0">
+									<div class="swiper-slide">
+										<img src="images/item/splash01.png" width="100%" height="100%"
+											alt="" />
+									</div>
+									<div class="swiper-slide">
+										<img src="images/item/splash02.png" width="100%" height="100%"
+											alt="" />
+									</div>
+									<div class="swiper-slide">
+										<img src="images/item/splash03.png" width="100%" height="100%"
+											alt="" />
+									</div>
+
+									<!-- Form Login/Register -->
+									<div style="background-image: url(images/item/bgdaftar.png);background-size:100%;" class="swiper-slide" id="PageRegis">
+										<form onsubmit="appMain.SetValid(this)" id="fcRegis"
+											class="login" action="member-regis" method="post"
+											data-type="ajax">
+											<input type="text" placeholder="Nama" name="userid"
+												data-require="lcuser" required="required" value="" />
+											<input type="text" placeholder="Nomor HP" name="notlp"
+												data-require="lcnotlp" required="required"
+												value="" />
+											<button type="submit" class="btn btn-default btnactive">DAFTAR</button>
+										</form>
+									</div>
+									<div style="background-image: url(images/item/bgmasuk.png);background-size:100%;" class="swiper-slide" id="PageLogin">
+										<form onsubmit="appMain.SetValid(this)" class="login"
+											id="fcLogin" action="member-login" method="post"
+											data-type="ajax">
+											<input type="text" placeholder="Nomor HP" name="notlp"
+												id="lcnotlp" data-require="lcnotlp" required="required"
+												value="089685777475" /> <input type="text"
+												placeholder="Password" name="userpass" data-require="lcpass"
+												required="required" value="Admin@1993" />
+											<button type="submit" class="btn btn-default btnactive">MASUK</button>
+											<span data-page="PageRegis" class="subtitle blink option">
+												<a onclick="appMain.GetPage('#PageGetpass')">Lupa
+													Password</a>
+											</span>
+										</form>
+									</div>
+									<!-- Form End -->
+								</div>
+								<div class="swiper-pagination"
+									style="position: absolute; bottom: 5%"></div>
+							</div>
+							<div id="PageGetpass" class="tab">
+								<form onsubmit="appMain.SetValid(this)"
+									style="text-align: center;" class="login" id="fcGtpass"
+									action="member-getpass" method="post" data-type="ajax">
+									<input type="text" placeholder="Nomor HP" name="notlp"
+										id="lcnotlp" data-require="lcnotlp" required="required"
+										value="" />
+									<button type="submit" class="btn btn-default btnactive"
+										style="margin-bottom: 2%">KIRIM</button>
+									<span data-page="PageRegis" class="subtitle blink option">
+										<a onclick="appMain.GetPage('#LandingPage')">Kembali</a>
+									</span>
+								</form>
+							</div>
+							<div id="PageChpass" class="tab">
+								<form onsubmit="appMain.SetValid(this)" id="fcChpass"
+									class="login" action="member-setpass" method="post"
+									data-type="ajax">
+									<input type="text" placeholder="Set your password"
+										name="userpass" data-require="lcpass" required="required" />
+									<button type="submit" class="btn btn-default btnactive">KIRIM</button>
+								</form>
+								<br />
+							</div>
+							<div id="PagePasscode" class="tab" style="position: relative">
+								<div class="page no-navbar no-swipeback" data-page="passcode">
+									<div class="page-content login-screen-content">
+										<div class="login-screen-title">Masukan Kode</div>
+										<form action="">
+											<div class="content-block passcode-input">
+												<input type="text" value="____" id="demo-numpad-inline" />
+											</div>
+											<div class="content-block passcode-numpad">
+												<div style="padding: 0; margin-right: -15px; width: auto"
+													class="content-block-inner">
+													<div id="numpad-inline-container"></div>
+												</div>
+											</div>
+										</form>
+									</div>
+								</div>
+							</div>
+
+							<div id="PageHome" class="tab listofitm"
+								style="max-height: 100%; min-height: 100%; margin: 0; padding: 0; overflow: hidden;">
+								<div class="mainDash" style="height: 100%;">
+									<div class="swiper-container swiper-2" data-effect="coverflow"
+										style="height: 25%;">
+										<div class="swiper-wrapper bannerslide"
+											style="margin: 0; padding: 0;">
+											<div class="swiper-slide">
+												<img src="images/item/slider1.jpg" width="100%"
+													height="100%" alt="" />
+											</div>
+										</div>
+										<div class="swiper-pagination"></div>
+									</div>
+									<div class="dashmenu">
+
+									</div>
+								</div>
+							</div>
+
+							<div id="PageListMain" onscroll="appOrd.GetScroll()"
+								class="tab listofitm"
+								style="height: 90%; max-height: 100%; padding-bottom: 3em; overflow-x: hidden;"></div>
+							<!-- -->
+							<div id="PageListOrder" class="tab listofitm">
+								<div class="litMainOrd"></div>
+								<div class="mainPrice">
+									<table class="mainTab">
+										<tr>
+											<td colspan="1" align="right"><i>Subtotal</i></td>
+											<td>:</td>
+											<td class="ItmPr"><i>Rp. <span id="subtot">0</span></i></td>
+										</tr>
+										<tr>
+											<td colspan="1" align="right"><i>Ongkos Kirim</i></td>
+											<td>:</td>
+											<td class="ItmPr"><i>Rp. <span id="lcCost">0</span></i></td>
+										</tr>
+										<tr>
+											<td colspan="1" align="right"><i><b>Total</b></i></td>
+											<td>:</td>
+											<td class="ItmPr"><i><b>Rp. <span id="lctot">0</span></b></i></td>
+										</tr>
+									</table>
+								</div>
+								<table class="detBut" style="width: 100%">
+									<td>
+										<button class="btncan" onclick="appOrd.GetShop(this)">Kembali
+											Belanja</button>
+										<button class="btnpro" id="btncheck"
+											onclick="appOrd.GetCheck(this)">
+											<i class="fa fa-shopping-cart detcart"></i>Pesan
+										</button>
+									</td>
+								</table>
+							</div>
+							<!-- -->
+							<div id="PageAlmt" class="tab listofitm">
+								<div id="map_canvas"></div>
+								<div class="almt" style="text-align: center; color: green">Jalan
+									Pakubuono no 15 jakarta</div>
+								<form style="text-align: center"
+									onsubmit="appOrd.getValid(this)" id="fcOrder"
+									action="app-setorder" method="POST" data-type="ajax">
+									<input type="text" placeholder="Detail Alamat" name="detadd"
+										data-require="lcdetadd" required="required" /> <input
+										type="text" placeholder="Keterangan Tambahan" name="descorder"
+										required="required" /> <input class="lat" type="hidden"
+										name="latadd" value="80.987871237123" /> <input class="long"
+										type="hidden" name="longadd" value="-60.89182931238" /> <input
+										class="almt" type="hidden" name="areaadd" value="alamat test" />
+									<button type="submit" class="btnpro" style="float: none">
+										<i class="fa fa-send detcart"></i>Kirim
+									</button>
+								</form>
+							</div>
+							<!-- -->
+							<!-- -->
+							<div id="PageProfile" class="tab listofitm">
+								<h4
+									style="width: 100%; margin-top: 10%; text-align: center; font-size: 20px">User
+									Profile</h4>
+								<br />
+								<div
+									style="font-size: 16px; width: 90%; margin: auto; padding-top: 10%;">
+									<fieldset>
+										<legend>Basic Information</legend>
+										<i class="fa fa-user"></i>&nbsp;<span class="lcnm">_._._._._._._._._._._._._.</span>
+										<br /> <i class="fa fa-gift">&nbsp;</i><span class="lcdate">_._._._._._._._._._._._._.</span>
+										<br /> <small style="text-align: right"><cite
+											title="San Francisco, USA">_._._._._._._._._._._._._.
+												<i class="fa fa-map-marker"></i>
+										</cite></small>
+									</fieldset>
+									<fieldset>
+										<legend>Detail Information</legend>
+										<i class="fa fa-phone"></i>&nbsp;<span class="lctlp">_._._._._._._._._._._._._.</span>
+										<br /> <i class="fa fa-envelope"></i>&nbsp;<span
+											class="lcemail">_._._._._._._._._._._._._.</span> <br /> <i
+											class="fa fa-globe"></i>&nbsp;<span class="lcweb"><a
+											href="http://www.jquery2dotnet.com">_._._._._._._._._._._._._.</a></span>
+										<br />
+									</fieldset>
+								</div>
+
+							</div>
+							<!-- -->
+							<div id="PageOrd" class="tab listofitm"
+								style="overflow: hidden; height: 100%">
+								<div class="buttons-row"
+									style="background: rgba(0, 255, 127, .1);">
+									<a data-tab="tabWait" data-group="1"
+										class="tab-link btnTab tabWait btnTabact"
+										onclick="appOrd.ChangeTab(this)">Menunggu</a> <a
+										data-tab="tabProgres" data-group="2"
+										class="tab-link btnTab tabProgres "
+										onclick="appOrd.ChangeTab(this)">Di Proses</a> <a
+										data-tab="tabComplete" data-group="3"
+										class="tab-link btnTab tabComplete"
+										onclick="appOrd.ChangeTab(this)">Di Terima</a>
+								</div>
+								<div class="listofitm" style="height: 85%">
+									<div class="tabs" style="">
+										<div id="tabWait" class="tab active"></div>
+										<div id="tabProgres" class="tab"></div>
+										<div id="tabComplete" class="tab"></div>
+									</div>
+								</div>
+							</div>
+							<!-- -->
+							<div id="PageListDetail" class="tab listofitm"
+								style="overflow: hidden;">
+								<div class="litMainOrddetail"
+									style="max-height: 60%; overflow: auto;"></div>
+								<div class="mainPrice">
+									<table class="mainTab">
+										<tr>
+											<td colspan="1" align="right"><i>Subtotal</i></td>
+											<td>:</td>
+											<td class="ItmPr"><i>Rp. <span id="subtotdet">0</span></i></td>
+										</tr>
+										<tr>
+											<td colspan="1" align="right"><i>Ongkos Kirim</i></td>
+											<td>:</td>
+											<td class="ItmPr"><i>Rp. <span id="lcCostdet">0</span></i></td>
+										</tr>
+										<tr>
+											<td colspan="1" align="right"><i><b>Total</b></i></td>
+											<td>:</td>
+											<td class="ItmPr"><i><b>Rp. <span id="lctotdet">0</span></b></i></td>
+										</tr>
+									</table>
+								</div>
+								<table class="detBut" style="width: 100%">
+									<td>
+										<button class="btncan orddetis" id="1"
+											onclick="appOrd.GetBack(this)">Kembali</button>
+										<button class="btnpro" id="btnccanbu" data-id="" data-stat="" data-inv=""
+											onclick="appOrd.GetCancelbuy(this)">
+											<i class="fa fa-shopping-cancel detcart"></i>Batalkan Pesanan
+										</button>
+									</td>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

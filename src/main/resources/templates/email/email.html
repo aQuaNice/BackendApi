@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title th:remove="all">Order Confirmation</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<!-- <link rel="stylesheet" href="/webjars/bootstrap/3.3.5/css/bootstrap.min.css" /> -->
+</head>
+<body>
+<style>
+.title{color: #555454; font-family: 'Open-sans', sans-serif; font-size: small;}
+.titlenm{font-weight: 500; font-size: 28px; text-transform: uppercase; line-height: 33px;}
+.titletq{font-weight: 500; font-size: 16px; text-transform: uppercase; line-height: 25px;}
+</style>
+
+	<div id=":1wf" class="ii gt adP adO">
+		<div id=":1wg"  >
+			<div class="adM"></div>
+			<table style="width: 100%; margin-top: 10px">
+				<tbody>
+					<tr>
+						<td  style="width: 20px; padding: 7px 0">&nbsp;</td>
+						<td align="center" style="padding: 7px 0">
+							<table  style="width: 100%">
+								<tbody>
+<!-- 									<tr> -->
+<!-- 										<td align="center"  style="border-bottom: 4px solid #333333; padding: 7px 0"> -->
+<!-- 										<a title="aQua Go" href="" style="color: #337ff1" target="_blank" data-saferedirecturl=" "> -->
+<!-- 										<img src="http://www.behijab.com/img/cms/Facebook_icon.png" alt="aQua Go" width="50" height="50" class="CToWUd" /> -->
+<!-- 										</a></td> -->
+<!-- 									</tr> -->
+									<tr>
+										<td align="left"  style="padding: 7px 0">
+<!-- 											<p> -->
+<!-- 												<span style="color: #555454; font-family: 'Open-sans', sans-serif; font-size: small"> -->
+													
+<!-- 													<span  style="font-weight: 500; font-size: 28px; text-transform: uppercase; line-height: 33px"> -->
+<!-- 													<a href="https://www.facebook.com/letsbehijab" target="_blank"> -->
+<!-- 															<img src=" http://www.behijab.com/img/cms/Facebook_icon.png" width="50" height="50" alt="Facebook_icon.png" class="CToWUd" /> -->
+<!-- 													</a>&nbsp;<a href="https://twitter.com/letsbehijab" target="_blank" > -->
+<!-- 															<img src=" http://www.behijab.com/img/cms/twitter_icon.png" alt="" width="50" height="50" class="CToWUd" /> -->
+<!-- 													</a>&nbsp;&nbsp;<a href="https://instagram.com/letsbehijab" target="_blank" > -->
+<!-- 															<img src=" http://www.behijab.com/img/cms/instagram_icon.png" alt="" width="50" height="50" class="CToWUd" /> -->
+<!-- 													</a>&nbsp;</span></span> -->
+<!-- 											</p> -->
+											<p>
+											
+												<span class="title">
+												<span class="titlenm" th:text="${title}"></span><br></br>
+												<span class="titletq" th:text="${desc}"></span>
+												</span>
+											</p>
+										</td>
+									</tr>
+									<tr>
+										<td  style="padding: 0">&nbsp;</td>
+									</tr>
+									<tr>
+									
+									<td  style="border: 1px solid #d6d4d4; background-color: #f8f8f8; padding: 7px 0">
+											<table  style="width: 100%">
+												<tbody>
+													<tr>
+														<td width="10" style="padding: 7px 0">&nbsp;</td>
+														<td style="padding: 7px 0"><span style="color: #555454; font-family: 'Open-sans', sans-serif; font-size: small"> </span>
+<p style="border-bottom: 1px solid #d6d4d4; margin: 3px 0 7px; text-transform: uppercase; font-weight: 500; font-size: 18px; padding-bottom: 10px">	 Your aQua Go login details</p>
+															<ol style="margin-bottom: 0"> </ol>
+															</td>
+														<td width="10" style="padding: 7px 0">&nbsp;</td>
+													</tr>
+													
+													<tr>
+														<td width="10" style="padding: 7px 0">&nbsp;</td>
+														<td style="padding: 7px 0"><span class="detail"> </span>
+															<span style="color: #777"> Here are your login details:<br></br>
+															<span style="color: #333"><strong>User ID : <a href="mailto:ratex.shandy@gmail.com" style="color: #337ff1" target="_blank" th:text="${email}"></a>
+																</strong></span><br></br>
+															<span style="color: #333"><strong><span class="il">Password</span> : </strong></span><span th:text="${pass}"></span>  </span></td>
+														<td width="10" style="padding: 7px 0">&nbsp;</td>
+												
+													</tr>
+												
+												</tbody>
+											</table>
+										</td>
+
+									</tr>
+									<tr>
+										<td  style="padding: 0">&nbsp;</td>
+									</tr>
+									<tr>
+										<td  style="border: 1px solid #d6d4d4; background-color: #f8f8f8; padding: 7px 0">
+											<table  style="width: 100%">
+												<tbody>
+													<tr>
+														<td width="10" style="padding: 7px 0">&nbsp;</td>
+														<td style="padding: 7px 0"><span
+															style="color: #555454; font-family: 'Open-sans', sans-serif; font-size: small">
+														</span>
+															<p style="border-bottom: 1px solid #d6d4d4; margin: 3px 0 7px; text-transform: uppercase; font-weight: 500; font-size: 18px; padding-bottom: 10px">Important
+																Security Tips:</p>
+															<ol style="margin-bottom: 0">
+																<li>Always keep your account details safe.</li>
+																<li>Never disclose your login details to anyone.</li>
+																<li><span class="il">Change</span> your <span class="il">password</span> regularly.</li>
+																<li>Should you suspect someone is using your
+																	account illegally, please notify us immediately.</li>
+															</ol></td>
+														<td width="10" style="padding: 7px 0">&nbsp;</td>
+													</tr>
+												</tbody>
+											</table>
+										</td>
+									</tr>
+									<tr>
+										<td  style="padding: 0">&nbsp;</td>
+									</tr>
+									<tr>
+										<td  style="padding: 7px 0"><span style="color: #555454; font-family: 'Open-sans', sans-serif; font-size: small">
+										<span>You can now use our apps: <a href="http://www.aquago.com/" style="color: #337ff1" target="_blank" >aQua Go</a></span>
+										</span>
+										</td>
+									</tr>
+									<tr>
+										<td  style="padding: 0">
+												<span style="color: #555454; font-family: 'Open-sans', sans-serif; font-size: small">
+													
+													<span  style="font-weight: 500; font-size: 28px; text-transform: uppercase; line-height: 33px">
+													<a href="https://www.facebook.com/letsbehijab" target="_blank">
+															<img src=" http://www.behijab.com/img/cms/Facebook_icon.png" width="50" height="50" alt="Facebook_icon.png" class="CToWUd" />
+													</a>&nbsp;<a href="https://twitter.com/letsbehijab" target="_blank" >
+															<img src=" http://www.behijab.com/img/cms/twitter_icon.png" alt="" width="50" height="50" class="CToWUd" />
+													</a>&nbsp;&nbsp;<a href="https://instagram.com/letsbehijab" target="_blank" >
+															<img src=" http://www.behijab.com/img/cms/instagram_icon.png" alt="" width="50" height="50" class="CToWUd" />
+													</a>&nbsp;</span></span>
+										</td>
+									</tr>
+									<tr>
+										<td  style="border-top: 4px solid #333333; padding: 7px 0">
+											<p>
+												<span><a href="" style="color: #337ff1" target="_blank" >aQua Go</a>&nbsp;</span>
+											</p>
+											<p>
+												<span>CV. Kayra Laksana<br></br>Ruko City Square
+													Business Park Blok B-61<br></br>Jalan Cijerah II,
+													Gempol Sari<br></br>Bandung Barat, Jawa Barat 4012<br></br>08 222 41 777 12&nbsp;/ 0811 989 3334
+												</span>
+											</p>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</td>
+						<td  style="width: 20px; padding: 7px 0">&nbsp;</td>
+					</tr>
+				</tbody>
+			</table>
+			<div class="yj6qo"></div>
+			<div class="adL"></div>
+		</div>
+	</div>
+
+
+</body>
+</html>

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title th:remove="all">Order Confirmation</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+	<!-- <link rel="stylesheet" href="/webjars/bootstrap/3.3.5/css/bootstrap.min.css" /> -->
+    
+</head>
+<body>
+<div style="padding-bottom: 10%">
+ <style>
+ .zebra-table {
+width: 100%;
+border-collapse: collapse;
+box-shadow: 0 2px 3px 1px #ddd;
+overflow: hidden;
+border:10px solid #fff;
+}
+.zebra-table th,.zebra-table td{
+vertical-align: top;
+padding:10px 7px;
+text-align: left;
+margin:0;
+}
+.zebra-table tbody tr:nth-child(odd){
+background:#eee;
+}
+</style>
+    <h2 th:text="${title}"> title</h2>
+    <b th:text="${description}"></b>
+    <br></br>
+    
+
+    <table class="zebra-table" border="1">
+    	<caption><em>List of Issue</em></caption>
+    	<thead>
+    	<th>Service Name</th>
+    	<th>Unstable Code</th>
+    	<th>Unstable Desc</th>
+    	<th>Time Check</th>
+    	</thead>
+    	
+    	
+    	<tbody>
+    	
+    		<tr th:each="currentClient, stat : ${content}">
+			  			<td th:text=" ${currentClient.CheckHostNm} +' - '+${currentClient.CheckURL}"></td>
+						<td th:text="${currentClient.CheckCODE}"></td>
+						<td th:text="${currentClient.CheckDESC}"></td>
+						<td th:text="${currentClient.CheckTIME}"></td>
+			</tr>
+    	
+    	</tbody>
+			
+
+    	 
+   
+    </table>
+    
+    
+   
+ 
+</div>
+  <br></br>
+  
+  
+
+<p><b th:text="${foterI}"></b></p>
+<p><b th:text="${foterII}"></b></p>
+
+<br></br>
+
+					
+<p>PT. IONPay Networks (NICEPay)</p>
+<p>Wisma GKBI 11th Floor, Suite 1103 B,C,D</p>
+<p>Jl. Jend. Sudirman No. 28, Jakarta 10210, Indonesia</p>
+<p>+6221 5790 2708~9</p>
+<p>+6285 693 999 233</p>
+ 
+<!-- 
+<script type="text/javascript" th:src="@{/webjars/jquery/2.1.3/jquery.min.js}"></script>
+	<script type="text/javascript" th:src="@{/webjars/bootstrap/3.3.5/js/bootstrap.min.js}"></script> -->
+ 
+</body>
+</html>
